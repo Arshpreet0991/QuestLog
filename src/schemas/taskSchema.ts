@@ -4,4 +4,5 @@ export const taskSchema = z.object({
   content: z.string(),
   taskType: z.enum(["mainQuest", "sideQuest"]),
   category: z.enum(["body", "mind", "wealth"]),
+  dayId: z.string(),
 });

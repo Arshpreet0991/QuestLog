@@ -1,5 +1,6 @@
 import ITask from "@/types/task.types";
 import mongoose from "mongoose";
+import { required } from "zod/mini";
 
 const TaskSchema = new mongoose.Schema(
   {
