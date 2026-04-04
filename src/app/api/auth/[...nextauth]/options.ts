@@ -22,9 +22,12 @@ export const authOptions: NextAuthOptions = {
 
       async authorize(credentials: any): Promise<any> {
         await dbConnect();
+
         try {
+          console.log("Auth secret : ", process.env.NEXT_AUTH_SECRET);
+
           const user = await User.findOne({
-            email: credentials.identifier.email,
+            email: credentials.email,
           });
 
           if (!user) {
@@ -58,6 +61,7 @@ export const authOptions: NextAuthOptions = {
         token.isVerified = user.isVerified;
         token.username = user.username;
       }
+
       return token;
     },
 
