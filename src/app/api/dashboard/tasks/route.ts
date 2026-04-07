@@ -7,7 +7,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import { taskSchema } from "@/schemas/taskSchema";
 import { getSession } from "@/helpers/getSession";
 import { NextRequest } from "next/server";
-import { error } from "console";
+import mongoose from "mongoose";
 
 export async function POST(request: Request) {
   await dbConnect();
@@ -74,5 +74,59 @@ export async function DELETE(request: NextRequest) {
     return successResponse(200, "Task deleted");
   } catch (error) {
     return errorResponse(500, "task deletetion failed, " + error);
+  }
+}
+
+export async function PATCH(request: NextRequest) {
+  await dbConnect();
+
+  try {
+    const userId = await getSession();
+    if (!userId) return errorResponse(401, "unauthorized, please log in");
+
+    const requestBody = await request.json();
+    const result = taskSchema.safeParse(requestBody);
+
+    if (!result.success)
+      return errorResponse(400, "Invalid taskType, category or Task Content");
+
+    const { content, taskType, category } = result.data;
+
+    const { taskId, isCompleted } = requestBody;
+    if (!taskId) return errorResponse(500, "task id does not exists");
+    if (!mongoose.Types.ObjectId.isValid(taskId))
+      return errorResponse(400, "Invalid task id");
+
+    const task = await Task.findOneAndUpdate(
+      { userId, _id: taskId },
+      { content, taskType, isCompleted, category },
+    );
+
+    if (!task) return errorResponse(404, "Task not found to update");
+
+    return successResponse(200, "Task updated");
+  } catch (error) {
+    return errorResponse(500, "task updation failed, " + error);
+  }
+}
+
+export async function GET(request: NextRequest) {
+  await dbConnect();
+
+  try {
+    const userId = await getSession();
+    if (!userId) return errorResponse(401, "unauthorized, please log in");
+
+    const dayId = request.nextUrl.searchParams.get("dayId");
+    if (!dayId) return errorResponse(400, "dayId is required");
+
+    const taskArray = await Task.find({ userId, dayId });
+
+    if (taskArray.length === 0)
+      return errorResponse(404, "No tasks exists for this day");
+
+    return successResponse(200, "Task List for today", taskArray);
+  } catch (error) {
+    return errorResponse(500, "fetching tasks failed, " + error);
   }
 }

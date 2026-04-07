@@ -5,14 +5,13 @@ import dbConnect from "@/lib/dbConnection";
 import { successResponse, errorResponse } from "@/lib/response";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
+import { getSession } from "@/helpers/getSession";
 
 export async function GET(request: Request) {
   await dbConnect();
 
   try {
-    const session = await getServerSession(authOptions);
-    if (!session) return errorResponse(401, "Unauthorized, please login");
-
-    const userId = session.user._id;
+    const userId = await getSession();
+    if (!userId) return errorResponse(404, "userId not found");
   } catch (error) {}
 }

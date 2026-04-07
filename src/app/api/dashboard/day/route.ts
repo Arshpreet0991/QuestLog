@@ -4,7 +4,6 @@ import Task from "@/models/task.model";
 import User from "@/models/user.model";
 import { getSession } from "@/helpers/getSession";
 import { NextRequest, NextResponse } from "next/server";
-import { error } from "console";
 import { errorResponse, successResponse } from "@/lib/response";
 
 export async function POST(request: NextRequest) {
@@ -14,7 +13,6 @@ export async function POST(request: NextRequest) {
     if (!userId) return errorResponse(401, "unauthorized, please log in");
 
     const { date } = await request.json();
-    console.log("date frontEnd: ", typeof date);
 
     if (!date) {
       return errorResponse(400, "invalid date");
@@ -55,6 +53,8 @@ export async function GET(request: NextRequest) {
 
     const day = await Day.findOne({ userId, date: new Date(normalizedDate) });
     if (!day) return errorResponse(404, "day not found");
+
+    //console.log("DAY: ", day);
 
     return successResponse(200, "Day found", day);
   } catch (error) {

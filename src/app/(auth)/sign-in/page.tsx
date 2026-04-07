@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 
 import axios from "axios";
+import toast from "react-hot-toast";
 
 function SignInPage() {
   const router = useRouter();
@@ -26,7 +27,7 @@ function SignInPage() {
         console.log("Invalid credentials");
       } else {
         router.push("/dashboard");
-        console.log("login success");
+        toast.success("Login Successful");
       }
     } catch (error) {
       console.log("cannot log in ", error);

@@ -1,18 +1,14 @@
 "use client";
-import React, { useEffect } from "react";
-import Category from "@/components/Category";
-import ImageBox from "@/components/ImageBox";
-import NavButtons from "@/components/NavButtons";
-import DateDisplay from "@/components/DateDisplay";
-import RankDisplay from "@/components/RankDisplay";
-import useDate, { DateProvider } from "@/context/DateContext";
-import { useState } from "react";
-import axios from "axios";
+import { DateProvider } from "@/context/DateContext";
+import { signOut } from "next-auth/react";
+import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
-import Link from "next/link";
-
-export default function Dashboard() {
-  /*
+import axios from "axios";
+export default function DashboardLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
@@ -77,34 +73,20 @@ export default function Dashboard() {
       toast.error("No tasks history found");
     }
   };
-
-  */
-
-  const { nextDay, prevDay } = useDate();
   return (
-    <>
-      <div className="min-h-screen flex flex-col justify-center">
-        <div className="flex justify-between items-center p-2">
-          <ImageBox />
-          <RankDisplay />
-        </div>
-        <div className="flex items-center justify-between m-5">
-          <NavButtons children="◀" fn={prevDay} />
-          <DateDisplay />
-          <NavButtons children="▶" fn={nextDay} />
-        </div>
-        <div className="flex flex-col gap-5">
-          <Link href="/dashboard/body">
-            <Category children="BODY" />
-          </Link>
-          <Link href="/dashboard/mind">
-            <Category children="MIND" />
-          </Link>
-          <Link href="/dashboard/wealth">
-            <Category children="WEALTH" />
-          </Link>
-        </div>
-      </div>
-    </>
+    <div>
+      <DateProvider value={{ date: currentDate, nextDay, prevDay, dayId }}>
+        <nav className="bg-white text-black fixed top-0 left-0 w-full flex justify-between items-center p-1">
+          <p className="bg-black text-white p-2 rounded-sm">Quest-Logger</p>
+          <button
+            className="bg-black text-white p-2 rounded-sm"
+            onClick={() => signOut()}
+          >
+            Logout
+          </button>
+        </nav>
+        {children}
+      </DateProvider>
+    </div>
   );
 }
