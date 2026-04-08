@@ -118,12 +118,10 @@ export async function GET(request: NextRequest) {
     if (!userId) return errorResponse(401, "unauthorized, please log in");
 
     const dayId = request.nextUrl.searchParams.get("dayId");
+    const category = request.nextUrl.searchParams.get("category");
     if (!dayId) return errorResponse(400, "dayId is required");
 
-    const taskArray = await Task.find({ userId, dayId });
-
-    if (taskArray.length === 0)
-      return errorResponse(404, "No tasks exists for this day");
+    const taskArray = await Task.find({ userId, dayId, category });
 
     return successResponse(200, "Task List for today", taskArray);
   } catch (error) {

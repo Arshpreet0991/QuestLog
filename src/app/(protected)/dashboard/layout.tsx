@@ -4,6 +4,8 @@ import { signOut } from "next-auth/react";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
+import Link from "next/link";
+import { Task } from "@/types/index";
 export default function DashboardLayout({
   children,
 }: Readonly<{
@@ -78,6 +80,18 @@ export default function DashboardLayout({
       <DateProvider value={{ date: currentDate, nextDay, prevDay, dayId }}>
         <nav className="bg-white text-black fixed top-0 left-0 w-full flex justify-between items-center p-1">
           <p className="bg-black text-white p-2 rounded-sm">Quest-Logger</p>
+          <button>
+            <Link href="/dashboard">home</Link>
+          </button>
+          <button>
+            <Link href="/dashboard/mind">Mind</Link>
+          </button>
+          <button>
+            <Link href="/dashboard/body">Body</Link>
+          </button>
+          <button>
+            <Link href="/dashboard/wealth">Wealth</Link>
+          </button>
           <button
             className="bg-black text-white p-2 rounded-sm"
             onClick={() => signOut()}
