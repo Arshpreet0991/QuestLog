@@ -13,10 +13,18 @@ export const signUpSchema = z.object({
     .string()
     .min(6, { message: "Password must be atleast 6 characters long" })
     .max(20, { message: "Password cannot be longer than 20 characters" }),
+<<<<<<< HEAD
 });
 
 export const logInSchema = z.object({
   email: z.string(),
+=======
+  timezone: z.string(),
+});
+
+export const logInSchema = z.object({
+  identifier: z.string(),
+>>>>>>> 8e7c8f7c5c760652b3b39d0effa8921ce8dc5948
   password: z.string(),
 });
 

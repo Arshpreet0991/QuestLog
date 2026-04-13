@@ -19,6 +19,22 @@ export async function proxy(request: NextRequest) {
   if (!isPublicPath && !token) {
     return NextResponse.redirect(new URL("/sign-in", request.url));
   }
+<<<<<<< HEAD
+=======
+
+  /*
+  if (
+    token &&
+    (url.pathname.startsWith("/sign-in") ||
+      url.pathname.startsWith("/sign-up") ||
+      url.pathname.startsWith("/verify"))
+  ) {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
+  }
+
+  return NextResponse.redirect(new URL("/home", request.url));
+  */
+>>>>>>> 8e7c8f7c5c760652b3b39d0effa8921ce8dc5948
 }
 
 export const config = {

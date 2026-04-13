@@ -1,8 +1,16 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+<<<<<<< HEAD
 import bcrypt from "bcryptjs";
 import dbConnect from "@/lib/dbConnection";
 import User from "@/models/User.Model";
+=======
+
+import bcrypt from "bcryptjs";
+import dbConnect from "@/lib/dbConnection";
+import User from "@/models/user.model";
+import { errorResponse } from "@/lib/response";
+>>>>>>> 8e7c8f7c5c760652b3b39d0effa8921ce8dc5948
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -22,6 +30,11 @@ export const authOptions: NextAuthOptions = {
         await dbConnect();
 
         try {
+<<<<<<< HEAD
+=======
+          console.log("Auth secret : ", process.env.NEXT_AUTH_SECRET);
+
+>>>>>>> 8e7c8f7c5c760652b3b39d0effa8921ce8dc5948
           const user = await User.findOne({
             email: credentials.email,
           });

@@ -2,8 +2,14 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+<<<<<<< HEAD
 import toast from "react-hot-toast";
 import Link from "next/link";
+=======
+
+import axios from "axios";
+import toast from "react-hot-toast";
+>>>>>>> 8e7c8f7c5c760652b3b39d0effa8921ce8dc5948
 
 function SignInPage() {
   const router = useRouter();
@@ -35,8 +41,12 @@ function SignInPage() {
 
   return (
     <>
+<<<<<<< HEAD
       <div className="flex flex-col justify-center items-center min-h-screen">
         <h1 className="text-3xl m-4">Sign In</h1>
+=======
+      <div className="flex">
+>>>>>>> 8e7c8f7c5c760652b3b39d0effa8921ce8dc5948
         <form
           className="bg-gray-400 flex flex-col gap-2 rounded-sm p-3"
           onSubmit={handleSubmit}
@@ -57,12 +67,15 @@ function SignInPage() {
           />
           <button className="bg-black p-1 rounded-sm">Sign-In</button>
         </form>
+<<<<<<< HEAD
         <Link className="m-5 " href="/sign-up">
           New User?{" "}
           <span className="bg-blue-400 p-2 rounded-sm text-black">
             Create Account
           </span>
         </Link>
+=======
+>>>>>>> 8e7c8f7c5c760652b3b39d0effa8921ce8dc5948
       </div>
     </>
   );
