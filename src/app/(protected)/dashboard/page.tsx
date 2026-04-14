@@ -2,9 +2,12 @@
 
 import { useDay } from "@/context/DayContext";
 import Link from "next/link";
+import { categoryStats } from "@/helpers/calculateTaskCompletion";
 
 function DashboardPage() {
-  const { date, prevDay, nextDay } = useDay();
+  const { date, prevDay, nextDay, taskList } = useDay();
+
+  const stats = categoryStats(taskList);
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen">
@@ -30,25 +33,28 @@ function DashboardPage() {
           className="bg-orange-600 text-2xl text-white p-2 w-3xs rounded-sm text-center font-bold"
           href="/dashboard/body"
         >
-          Body
+          Body{" "}
+          <p>
+            {stats["body"]?.completed ?? 0} / {stats["body"]?.total ?? 0}
+          </p>
         </Link>
         <Link
           className="bg-orange-600 text-2xl text-white p-2 w-3xs rounded-sm text-center font-bold"
           href="/dashboard/mind"
         >
-          Mind
+          Mind{" "}
+          <p>
+            {stats["mind"]?.completed ?? 0} / {stats["mind"]?.total ?? 0}
+          </p>
         </Link>
         <Link
           className="bg-orange-600 text-2xl text-white p-2 w-3xs rounded-sm text-center font-bold"
           href="/dashboard/wealth"
         >
           Wealth
-        </Link>
-        <Link
-          className="bg-orange-600 text-2xl text-white p-2 w-3xs rounded-sm text-center font-bold"
-          href="/dashboard/wealth"
-        >
-          Relations
+          <p>
+            {stats["wealth"]?.completed ?? 0} / {stats["wealth"]?.total ?? 0}
+          </p>
         </Link>
       </div>
     </div>

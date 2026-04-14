@@ -30,7 +30,7 @@ function TaskItems({
   // toggle task
 
   const toggleTaskStatus = () => {
-    console.log("todo status in items: ", todo.isCompleted);
+    // console.log("todo status in items: ", todo.isCompleted);
 
     const newStatus = !isCompleted;
     setIsCompleted(newStatus);

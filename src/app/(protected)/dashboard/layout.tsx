@@ -2,8 +2,10 @@
 
 import { DayProvider } from "@/context/DayContext";
 import axios from "axios";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { ITask } from "@/types/Models.Types";
 
 export default function DashboardLayout({
   children,
@@ -15,6 +17,7 @@ export default function DashboardLayout({
 
   const [currentDate, setCurrentDate] = useState(today);
   const [dayId, setDayId] = useState("");
+  const [taskList, setTaskList] = useState<ITask[]>([]);
 
   const createDay = async () => {
     try {
@@ -23,6 +26,7 @@ export default function DashboardLayout({
       if (!response.data.success) return;
       const newDay = response.data.data;
       setDayId(newDay._id);
+      await fetchAllTasks(newDay._id);
     } catch (error) {
       console.error(" day creation failed: ", error);
     }
@@ -91,17 +95,56 @@ export default function DashboardLayout({
     }
   };
 
+  // fetch all tasks
+  const fetchAllTasks = async (id: string) => {
+    const response = await axios.get("/api/dashboard/tasks", {
+      params: { dayId: id },
+    });
+    if (response.data.success) setTaskList(response.data.data);
+  };
+
+  useEffect(() => {
+    if (!dayId) return;
+    fetchAllTasks(dayId);
+  }, [dayId]);
+
   return (
     <DayProvider
-      value={{ date: currentDate, nextDay, prevDay, createDay, dayId }}
+      value={{
+        date: currentDate,
+        nextDay,
+        prevDay,
+        createDay,
+        dayId,
+        taskList,
+        setTaskList,
+      }}
     >
       <nav className="bg-white text-2xl fixed top-0 flex text-black p-1 w-full justify-between">
-        <button className="bg-amber-100 p-1 rounded-sm">Home</button>
-        <button className="bg-amber-100 p-1 rounded-sm">Body</button>
-        <button className="bg-amber-100 p-1 rounded-sm">Mind</button>
-        <button className="bg-amber-100 p-1 rounded-sm">Wealth</button>
-        <button className="bg-amber-100 p-1 rounded-sm">Relationships</button>
-        <button className="bg-amber-100 p-1 rounded-sm">Logout</button>
+        <Link
+          className="bg-orange-600 text-2xl text-white p-2 w-3xs rounded-sm text-center font-bold"
+          href="/dashboard"
+        >
+          Home
+        </Link>
+        <Link
+          className="bg-orange-600 text-2xl text-white p-2 w-3xs rounded-sm text-center font-bold"
+          href="/dashboard/body"
+        >
+          Body
+        </Link>
+        <Link
+          className="bg-orange-600 text-2xl text-white p-2 w-3xs rounded-sm text-center font-bold"
+          href="/dashboard/mind"
+        >
+          Mind
+        </Link>
+        <Link
+          className="bg-orange-600 text-2xl text-white p-2 w-3xs rounded-sm text-center font-bold"
+          href="/dashboard/wealth"
+        >
+          Wealth
+        </Link>
       </nav>
 
       {children}

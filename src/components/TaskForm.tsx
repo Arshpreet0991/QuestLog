@@ -6,12 +6,17 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useDay } from "@/context/DayContext";
 import TaskItems from "@/components/TaskItems";
+import { categoryStats } from "@/helpers/calculateTaskCompletion";
 
 function TaskForm({ category }: { category: string }) {
-  const [taskList, setTaskList] = useState<ITask[]>([]);
+  //const [taskList, setTaskList] = useState<ITask[]>([]);
+
+  const { taskList, setTaskList, dayId } = useDay();
   const [task, setTask] = useState("");
-  const { dayId } = useDay();
-  const isMainQuest = taskList.some((task) => task.taskType === "mainQuest");
+  const categoryTasks = taskList.filter((t) => t.category === category);
+  const isMainQuest = categoryTasks.some(
+    (task) => task.taskType === "mainQuest",
+  );
 
   // add tasks
   const addTask = async (e: any) => {
@@ -20,7 +25,7 @@ function TaskForm({ category }: { category: string }) {
     const todo: ITask = {
       task,
       taskType: isMainQuest ? "sideQuest" : "mainQuest",
-      category: category as "body" | "mind" | "wealth" | "relationships",
+      category: category as "body" | "mind" | "wealth",
       points: isMainQuest ? 10 : 20,
       isCompleted: false,
     };
@@ -35,10 +40,8 @@ function TaskForm({ category }: { category: string }) {
       setTask("");
 
       if (response.data.success) toast.success("Quest Added");
-
-      console.log(response.data.data._id);
     } catch (error) {
-      toast.error("Cannot add Quest right now");
+      toast.error("Quest limit reached");
     }
   };
 
@@ -46,10 +49,18 @@ function TaskForm({ category }: { category: string }) {
     const response = await axios.get("/api/dashboard/tasks", {
       params: { dayId, category },
     });
-    if (!response.data.success) toast.error("Cannot fetch quests");
+    if (!response.data.success) {
+      toast.error("Cannot fetch quests");
+      return;
+    }
     //console.log(response.data.data);
 
-    setTaskList(response.data.data);
+    // Remove stale tasks for current category, then add fresh data from server
+    // This preserves other categories in context while updating only the current one
+    setTaskList((prev) => [
+      ...prev.filter((t) => t.category !== category),
+      ...response.data.data,
+    ]);
   };
   useEffect(() => {
     if (!dayId) return; // skip if dayId not ready yet
@@ -82,7 +93,7 @@ function TaskForm({ category }: { category: string }) {
       prev.map((task) => {
         if (task._id === taskId) {
           newStatus = !task.isCompleted; // capture new value here
-          console.log("newStatus calculated: ", newStatus);
+          //console.log("newStatus calculated: ", newStatus);
           return { ...task, isCompleted: newStatus };
         }
         return task;
@@ -139,7 +150,7 @@ function TaskForm({ category }: { category: string }) {
       </form>
 
       <div>
-        {taskList.map((todo) => (
+        {categoryTasks.map((todo) => (
           <div key={todo._id}>
             <TaskItems
               todo={todo}

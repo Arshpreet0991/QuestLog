@@ -24,6 +24,33 @@ export async function PATCH(request: NextRequest) {
       { $set: { "taskList.$.isCompleted": resultStatus } },
       { new: true },
     );
+
+    /*
+    // scoring logic
+    const tasks = day.taskList;
+    const completedMainQuestCount = tasks.filter(
+      (task: ITask) =>
+        task.taskType === "mainQuest" && task.isCompleted === true,
+    ).length;
+
+    const completedSideQuestCount = tasks.filter(
+      (task: ITask) =>
+        task.taskType === "sideQuest" && task.isCompleted === true,
+    ).length;
+
+    const totalTasks = tasks.length;
+
+    const sideQuestsCount = totalTasks - 3;
+    const sideQuestPoints = sideQuestsCount > 0 ? 40 / sideQuestsCount : 0;
+
+    console.log("completed main quests: ", completedMainQuestCount);
+    console.log("completed side quests: ", completedSideQuestCount);
+    console.log("total tasks: ", totalTasks);
+
+    // let sideQuestScore = (totalTasks - mainQuestCount) / 100;
+    // let mainQuestScore = mainQuestCount * 15;
+    // let totalScore = mainQuestScore + sideQuestScore;
+*/
     if (!day) return errorResponse(404, "Day not found");
 
     return successResponse(200, "Task updated", day.taskList);

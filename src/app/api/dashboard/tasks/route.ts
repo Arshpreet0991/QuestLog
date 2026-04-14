@@ -16,12 +16,16 @@ export async function POST(request: NextRequest) {
     const { todo, dayId } = await request.json();
 
     const day = await Day.findOneAndUpdate(
-      { _id: dayId, userId },
-      { $push: { taskList: todo } }, // add to an existing array
+      {
+        _id: dayId,
+        userId,
+        $expr: { $lt: [{ $size: "$taskList" }, 15] }, // only update if less than 15
+      },
+      { $push: { taskList: todo } },
       { new: true },
     );
 
-    if (!day) return errorResponse(400, "day doesn't exists to add task");
+    if (!day) return errorResponse(422, "Task limit reached or day not found");
 
     return successResponse(200, "task added", day.taskList);
   } catch (error) {
@@ -42,15 +46,16 @@ export async function GET(request: NextRequest) {
     const day = await Day.findOne({ userId, _id: dayId });
     if (!day) return errorResponse(404, "day not found");
 
-    const categoryTasks = day.taskList.filter(
-      (task: ITask) => task.category === category,
-    );
+    // filter by category only if provided
+    const tasks = category
+      ? day.taskList.filter((task: ITask) => task.category === category)
+      : day.taskList; // return all tasks if no category
 
-    return successResponse(
-      200,
-      "task list fetched successfully",
-      categoryTasks,
-    );
+    // const categoryTasks = day.taskList.filter(
+    //   (task: ITask) => task.category === category,
+    // );
+
+    return successResponse(200, "task list fetched successfully", tasks);
   } catch (error) {
     return errorResponse(400, "task list fetch failed", error);
   }

@@ -24,7 +24,7 @@ export interface IReflection {
 // interface for Task model
 
 export type TaskType = "mainQuest" | "sideQuest";
-export type Category = "body" | "mind" | "wealth" | "relationships";
+export type Category = "body" | "mind" | "wealth";
 
 export interface ITask {
   _id?: string;
