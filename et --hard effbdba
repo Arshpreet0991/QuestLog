@@ -1,0 +1,11 @@
+[33m8d07228[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m solved the conflicts from old code
+[33meffbdba[m restarted project with improved architecture
+[33md068738[m restarted project with improved architecture
+[33m3332b84[m Initial commit from Create Next App
+[33m8e7c8f7[m added tasks display by categories. Added toggle with functionality to toggle task status
+[33m6d11271[m added the create task functionality. Changed the context from page level to layout level. Added day id in the context.
+[33m12df354[m created delete task route
+[33me5b1374[m created routes to add days and fetch days.
+[33m1ca1416[m added the verify code route
+[33mce1e77b[m first commit
+[33m527e856[m Initial commit from Create Next App

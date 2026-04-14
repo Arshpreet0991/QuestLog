@@ -10,7 +10,6 @@ import TaskItems from "@/components/TaskItems";
 function TaskForm({ category }: { category: string }) {
   const [taskList, setTaskList] = useState<ITask[]>([]);
   const [task, setTask] = useState("");
-  const [completeStatus, setCompleteStatus] = useState(false);
   const { dayId } = useDay();
   const isMainQuest = taskList.some((task) => task.taskType === "mainQuest");
 
@@ -26,41 +25,29 @@ function TaskForm({ category }: { category: string }) {
       isCompleted: false,
     };
 
-    setTaskList((prev) => [...prev, todo]);
     try {
       const response = await axios.post("/api/dashboard/tasks", {
         todo,
         dayId,
       });
-      if (response.data.sucess) toast.success("Quest Added");
+
+      fetchTasks();
+      setTask("");
+
+      if (response.data.success) toast.success("Quest Added");
+
+      console.log(response.data.data._id);
     } catch (error) {
       toast.error("Cannot add Quest right now");
     }
   };
 
-  /*
-  const sendTaskList = async () => {
-    try {
-      const response = await axios.post("/api/dashboard/tasks", {
-        taskList,
-        dayId,
-      });
-      if (response.data.success) toast.success("Task Added");
-    } catch (error) {
-      console.error("Error in adding task: ", error);
-    }
-  };
-
-  useEffect(() => {
-    if (!dayId) return; //intial day id is empty, so to avoid error on first render.
-    sendTaskList();
-  }, [taskList]);
-*/
   const fetchTasks = async () => {
     const response = await axios.get("/api/dashboard/tasks", {
-      params: { dayId },
+      params: { dayId, category },
     });
     if (!response.data.success) toast.error("Cannot fetch quests");
+    //console.log(response.data.data);
 
     setTaskList(response.data.data);
   };
@@ -90,25 +77,24 @@ function TaskForm({ category }: { category: string }) {
   };
 
   // mark task as complete
-  async function taskComplete(taskId: string) {
+  async function taskComplete(taskId: string, newStatus: boolean) {
     setTaskList((prev) =>
       prev.map((task) => {
         if (task._id === taskId) {
-          setCompleteStatus(!completeStatus);
-          return { ...task, isCompleted: completeStatus };
+          newStatus = !task.isCompleted; // capture new value here
+          console.log("newStatus calculated: ", newStatus);
+          return { ...task, isCompleted: newStatus };
         }
         return task;
       }),
     );
 
     try {
-      const response = await axios.patch("/api/dashboard/tasks/complete", {
+      await axios.patch("/api/dashboard/tasks/complete", {
         taskId,
         dayId,
-        isCompleted: completeStatus,
+        resultStatus: newStatus!, // send new value
       });
-
-      if (response.data.sucess) toast.success("Task Updated");
     } catch (error) {
       toast.error("Task update failed");
     }

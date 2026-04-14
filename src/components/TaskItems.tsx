@@ -30,8 +30,11 @@ function TaskItems({
   // toggle task
 
   const toggleTaskStatus = () => {
-    taskComplete(todo._id);
-    setIsCompleted((prev) => !prev);
+    console.log("todo status in items: ", todo.isCompleted);
+
+    const newStatus = !isCompleted;
+    setIsCompleted(newStatus);
+    taskComplete(todo._id, newStatus);
   };
 
   // delete task
@@ -43,7 +46,7 @@ function TaskItems({
           className={` text-white p-2 rounded-sm ${isCompleted ? "bg-green-700" : "bg-red-500"}`}
           onClick={toggleTaskStatus}
         >
-          Complete
+          {isCompleted ? "completed" : "pending"}
         </button>
         <input
           type="text"

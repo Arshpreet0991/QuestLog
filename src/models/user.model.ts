@@ -1,48 +1,43 @@
 import mongoose from "mongoose";
-import IUser from "@/types/user.types";
+import { IUser } from "../types/Models.Types";
 
 const UserSchema = new mongoose.Schema<IUser>(
   {
-    email: {
-      type: String,
-      unique: true,
-      required: [true, "Please provide an email"],
-    },
-    username: {
-      type: String,
-      required: [true, "Please provide a username"],
-    },
-    password: {
-      type: String,
-      required: [true, "Please provide a password"],
-    },
     avatar: {
       type: String,
       default: "",
     },
-
-    timezone: {
+    username: {
       type: String,
-      required: true,
+      required: [true, "username is required"],
     },
-    isVerified: {
-      type: Boolean,
-      default: false,
+    email: {
+      type: String,
+      required: [true, "email is required"],
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: [true, "password is required"],
     },
     verifyCode: {
-      type: String,
+      type: Number,
       required: [true, "Verify Code is required"],
     },
     verifyCodeExpiry: {
       type: Date,
       required: [true, "Verify Code Expiry is required"],
     },
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true },
 );
 
-const User =
-  (mongoose.models.User as mongoose.Model<IUser>) ||
-  mongoose.model<IUser>("User", UserSchema);
+UserSchema.index({ email: 1 }, { unique: true });
+
+const User = mongoose.models.User || mongoose.model("User", UserSchema);
 
 export default User;

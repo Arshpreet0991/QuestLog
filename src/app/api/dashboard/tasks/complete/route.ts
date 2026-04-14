@@ -1,7 +1,8 @@
 import dbConnect from "@/lib/dbConnection";
 import { errorResponse, successResponse } from "@/lib/response";
 import sessionAuthJs from "@/lib/sessionAuthJs";
-import Day from "@/models/Day.Model";
+import Day from "@/models/Day.model";
+import { ITask } from "@/types/Models.Types";
 import { NextRequest } from "next/server";
 
 export async function PATCH(request: NextRequest) {
@@ -12,14 +13,15 @@ export async function PATCH(request: NextRequest) {
     const userId = user?._id;
     if (!userId) return errorResponse(404, "user id not found");
 
-    const { taskId, dayId, isCompleted } = await request.json();
+    const { taskId, dayId, resultStatus } = await request.json();
     if (!taskId) return errorResponse(404, "Quests not found");
 
-    console.log("recu isCompleted: ", isCompleted);
+    // const result = taskList.find((task: ITask) => task._id === taskId);
+    // console.log("result:", result);
 
     const day = await Day.findOneAndUpdate(
       { userId, _id: dayId, "taskList._id": taskId },
-      { $set: { "taskList.$.isCompleted": isCompleted } },
+      { $set: { "taskList.$.isCompleted": resultStatus } },
       { new: true },
     );
     if (!day) return errorResponse(404, "Day not found");

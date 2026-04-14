@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
   "name": "the-main-quest",
-=======
-  "name": "quest-logger",
->>>>>>> 8e7c8f7c5c760652b3b39d0effa8921ce8dc5948
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -13,20 +9,11 @@
     "lint": "eslint"
   },
   "dependencies": {
-<<<<<<< HEAD
     "@react-email/render": "^2.0.6",
     "axios": "^1.15.0",
     "bcryptjs": "^3.0.3",
     "mongoose": "^9.4.1",
     "next": "16.2.3",
-=======
-    "@react-email/components": "^1.0.11",
-    "@react-email/render": "^2.0.5",
-    "axios": "^1.14.0",
-    "bcryptjs": "^3.0.3",
-    "mongoose": "^9.3.3",
-    "next": "16.2.1",
->>>>>>> 8e7c8f7c5c760652b3b39d0effa8921ce8dc5948
     "next-auth": "^4.24.13",
     "react": "19.2.4",
     "react-dom": "19.2.4",
@@ -41,11 +28,7 @@
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
-<<<<<<< HEAD
     "eslint-config-next": "16.2.3",
-=======
-    "eslint-config-next": "16.2.1",
->>>>>>> 8e7c8f7c5c760652b3b39d0effa8921ce8dc5948
     "tailwindcss": "^4",
     "typescript": "^5"
   }
