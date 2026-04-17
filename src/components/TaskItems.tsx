@@ -1,21 +1,15 @@
 "use client";
 import { useState } from "react";
-import { ITask } from "@/types/Models.Types";
+import { Category, ITask } from "@/types/Models.Types";
+import useTask from "@/hooks/useTask";
+import ToggleComponent from "./ToggleComponent";
 
-function TaskItems({
-  todo,
-  updateTask,
-  taskComplete,
-  deleteTask,
-}: {
-  todo: ITask;
-  updateTask: any;
-  taskComplete: any;
-  deleteTask: any;
-}) {
-  const [task, setTask] = useState(todo.task);
+function TaskItems({ todo }: { todo: ITask }) {
+  // get task crud from useTask
+  const { deleteTask, taskComplete, updateTask } = useTask({ task: todo });
+
+  const [taskTitle, setTaskTitle] = useState(todo.title);
   const [isTaskEditable, setIsTaskEditable] = useState(true);
-  const [isCompleted, setIsCompleted] = useState(todo.isCompleted);
 
   // edit task
   const editTask = () => {
@@ -24,34 +18,28 @@ function TaskItems({
 
   const saveTask = () => {
     setIsTaskEditable(true); // disable editing
-    updateTask(todo._id, task); // now save
+    updateTask(todo._id!, taskTitle); // now save
   };
-
-  // toggle task
-
-  const toggleTaskStatus = () => {
-    // console.log("todo status in items: ", todo.isCompleted);
-
-    const newStatus = !isCompleted;
-    setIsCompleted(newStatus);
-    taskComplete(todo._id, newStatus);
-  };
-
-  // delete task
 
   return (
     <>
       <div className="bg-amber-200 p-2 rounded-sm text-black text-xl flex justify-between">
-        <button
-          className={` text-white p-2 rounded-sm ${isCompleted ? "bg-green-700" : "bg-red-500"}`}
-          onClick={toggleTaskStatus}
-        >
-          {isCompleted ? "completed" : "pending"}
-        </button>
+        <div className="flex items-center">
+          <button
+            onClick={() => taskComplete(todo._id!)}
+            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-300 
+        ${todo.isCompleted ? "bg-green-500" : "bg-gray-300"}`}
+          >
+            <span
+              className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-300 
+          ${todo.isCompleted ? "translate-x-6" : "translate-x-1"}`}
+            />
+          </button>
+        </div>
         <input
           type="text"
-          value={task}
-          onChange={(e) => setTask(e.target.value)}
+          value={taskTitle}
+          onChange={(e) => setTaskTitle(e.target.value)}
           disabled={isTaskEditable}
           className={`${isTaskEditable ? "" : "bg-green-200 border-2 border-black px-2 rounded-sm"}`}
         />
@@ -63,7 +51,7 @@ function TaskItems({
         </button>
         <button
           className="bg-amber-800 text-white p-2 rounded-sm"
-          onClick={() => deleteTask(todo._id)}
+          onClick={() => deleteTask(todo._id!)}
         >
           Delete
         </button>

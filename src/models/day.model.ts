@@ -24,7 +24,7 @@ const DaySchema = new mongoose.Schema<IDay>(
     },
     taskList: [
       {
-        task: {
+        title: {
           type: String,
           required: [true, "cant have empty task"],
         },
@@ -40,11 +40,6 @@ const DaySchema = new mongoose.Schema<IDay>(
         category: {
           type: String,
           enum: ["body", "mind", "wealth", "relationships"],
-          required: true,
-        },
-
-        points: {
-          type: Number,
           required: true,
         },
       },

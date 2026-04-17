@@ -28,11 +28,10 @@ export type Category = "body" | "mind" | "wealth";
 
 export interface ITask {
   _id?: string;
-  task: string;
+  title: string;
   isCompleted: boolean;
   taskType: TaskType;
   category: Category;
-  points: number;
 }
 
 // interface for User model

@@ -8,11 +8,10 @@ export async function POST(request: NextRequest) {
   await dbConnect();
 
   try {
-    const user = await sessionAuthJs();
-    if (!user) {
+    const userId = await sessionAuthJs();
+    if (!userId) {
       return errorResponse(500, "cannot get the user from session");
     }
-    const userId = user._id;
 
     const { currentDate } = await request.json();
     if (!currentDate) return errorResponse(500, "cant fetch current date");
@@ -23,7 +22,7 @@ export async function POST(request: NextRequest) {
         // only set these on creation
         $setOnInsert: {
           date: currentDate,
-          userId: user._id,
+          userId,
           reflection: {
             wentRight: "",
             wentWrong: "",
@@ -49,12 +48,10 @@ export async function GET(request: NextRequest) {
   await dbConnect();
 
   try {
-    const user = await sessionAuthJs();
-    if (!user) {
+    const userId = await sessionAuthJs();
+    if (!userId) {
       return errorResponse(500, "cannot get the user from session");
     }
-
-    const userId = user._id;
 
     const newDate = request.nextUrl.searchParams.get("date");
     if (!newDate) return errorResponse(400, "Date is required");
