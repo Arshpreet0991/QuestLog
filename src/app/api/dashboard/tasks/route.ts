@@ -37,7 +37,6 @@ export async function GET(request: NextRequest) {
     const userId = await sessionAuthJs();
     if (!userId) return errorResponse(400, "user not found");
     const dayId = request.nextUrl.searchParams.get("dayId");
-    const category = request.nextUrl.searchParams.get("category");
 
     const day = await Day.findOne({ userId, _id: dayId });
     if (!day) return errorResponse(404, "day not found");

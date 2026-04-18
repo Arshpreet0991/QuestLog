@@ -13,9 +13,11 @@ export async function POST(request: NextRequest) {
       return errorResponse(500, "cannot get the user from session");
     }
 
-    const { currentDate } = await request.json();
+    const { currentDate, yesterday } = await request.json();
     if (!currentDate) return errorResponse(500, "cant fetch current date");
+    if (!yesterday) return errorResponse(500, "cant fetch yesterday");
 
+    // create day logic
     const day = await Day.findOneAndUpdate(
       { userId, date: currentDate }, // find by this
       {
@@ -37,7 +39,9 @@ export async function POST(request: NextRequest) {
       },
     );
 
-    return successResponse(200, "day fetched or created successfully", day);
+    return successResponse(200, "day created successfully", {
+      day,
+    });
   } catch (error) {
     console.error("Day creation failed ", error);
     return errorResponse(500, "Day creation failed");
@@ -64,5 +68,23 @@ export async function GET(request: NextRequest) {
     return successResponse(200, "day fetched", day);
   } catch (error) {
     return errorResponse(400, "day not found");
+  }
+}
+
+export async function PATCH(request: NextRequest) {
+  await dbConnect();
+  try {
+    const userId = await sessionAuthJs();
+    if (!userId) {
+      return errorResponse(401, "unauthorized");
+    }
+
+    const { dayId, score } = await request.json();
+
+    await Day.findOneAndUpdate({ _id: dayId, userId }, { score });
+
+    return successResponse(200, "score updated");
+  } catch (error) {
+    return errorResponse(500, "score update failed");
   }
 }

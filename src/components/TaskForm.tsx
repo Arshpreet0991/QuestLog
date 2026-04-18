@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useTask from "@/hooks/useTask";
 import { Category, TaskType } from "@/types/Models.Types";
+import { useTaskContext } from "@/context/TaskContext";
 
 function TaskForm({ category }: { category: Category }) {
   const [task, setTask] = useState({
@@ -12,16 +13,26 @@ function TaskForm({ category }: { category: Category }) {
     category,
   });
 
+  const { taskList } = useTaskContext();
+
+  const isMainQuest = !taskList.some(
+    (t) => t.category === task.category && t.taskType === "mainQuest",
+  );
+
   const { addTask } = useTask({ task });
+  const addTaskToList = (e: React.SubmitEvent) => {
+    e.preventDefault();
+    addTask();
+  };
 
   return (
     <>
       <form
-        onSubmit={addTask}
+        onSubmit={addTaskToList}
         className="flex flex-col items-center justify-center m-4"
       >
         <label className="text-3xl" htmlFor="addTask">
-          Add your Main Quest
+          Add your {isMainQuest ? "Main" : "Side"} Quest
         </label>
         <div>
           <input

@@ -4,12 +4,21 @@ import Link from "next/link";
 import useCalculateStats from "@/hooks/useCalulateStats";
 import { useRank } from "@/hooks/useRank";
 import Rank from "@/components/Rank";
+import DateNav from "@/components/DateNav";
 
 function DashboardPage() {
-  const { bodyTaskStats, mindTaskStats, wealthTaskStats } = useCalculateStats();
+  const { bodyTaskStats, mindTaskStats, wealthTaskStats, overallStats } =
+    useCalculateStats();
+
   const rank = useRank();
   return (
     <div className="flex flex-col justify-center items-center min-h-screen">
+      <div className="">
+        <DateNav />
+      </div>
+      <div>
+        Overall Progress: {overallStats.completed}/{overallStats.total}
+      </div>
       <div className="flex items-center justify-center text-3xl text-white">
         <Rank rank={rank} />
       </div>

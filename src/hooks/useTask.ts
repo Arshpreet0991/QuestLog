@@ -4,15 +4,35 @@ import axios from "axios";
 import { useDayHook } from "./useDayHook";
 import { useTaskList } from "./useTaskList";
 import { useTaskContext } from "@/context/TaskContext";
+import { useDayContext } from "@/context/DayContext";
+import useCalculateStats from "./useCalulateStats";
 
 function useTask({ task }: { task: ITask }) {
-  const { dayId } = useDayHook();
+  const { dayId, currentDate } = useDayContext();
 
   const { taskList, fetchTaskList } = useTaskContext();
 
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
   // add tasks
-  const addTask = async (e: any) => {
-    e.preventDefault();
+  const addTask = async () => {
+    if (currentDate.getTime() < today.getTime()) {
+      toast.error("Day already passed, cannot add task");
+      return;
+    }
+
+    const categoryTask = task.category;
+
+    const taskListByCategory = taskList.filter(
+      (task) => task.category === categoryTask,
+    );
+
+    const alreadyHasMainQuest = taskListByCategory.some(
+      (task) => task.taskType === "mainQuest",
+    );
+
+    task.taskType = alreadyHasMainQuest ? "sideQuest" : "mainQuest";
 
     try {
       const response = await axios.post("/api/dashboard/tasks", {
@@ -49,6 +69,8 @@ function useTask({ task }: { task: ITask }) {
   // edit task
   const updateTask = async (taskId: string, updatedTitle: string) => {
     try {
+      if (currentDate.getTime() === today.getTime()) return;
+
       const response = await axios.patch("/api/dashboard/tasks", {
         taskId,
         dayId,
@@ -66,6 +88,14 @@ function useTask({ task }: { task: ITask }) {
 
   // mark task as complete
   async function taskComplete(taskId: string) {
+    if (currentDate.getTime() < today.getTime()) {
+      toast.error("Day already passed");
+      return;
+    }
+    if (currentDate.getTime() > today.getTime()) {
+      toast.error("Day has not begun yet");
+      return;
+    }
     try {
       const response = await axios.patch("/api/dashboard/tasks/complete", {
         taskId,

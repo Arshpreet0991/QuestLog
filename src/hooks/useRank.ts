@@ -6,15 +6,17 @@ export function useRank() {
   if (!taskList) return;
   if (taskList.length === 0) return;
 
-  const allTasksCompleted = taskList.every((task) => task.isCompleted);
-  if (allTasksCompleted) return "SSS";
-
   const mainQuestCount = taskList.reduce((acc, task) => {
     if (task.taskType === "mainQuest" && task.isCompleted) {
       acc += 1;
     }
     return acc;
   }, 0);
+
+  const allTasksCompleted = taskList.every(
+    (task) => task.isCompleted && mainQuestCount === 3,
+  );
+  if (allTasksCompleted) return "SSS";
 
   if (mainQuestCount === 3) return "S";
   if (mainQuestCount === 2) return "A";

@@ -131,3 +131,9 @@ const filteredTasks = category
 - Dashboard uses `allTasks` for rank calculation
 
 No need for separate API calls per category.
+
+### Rule: A hook called in multiple places creates multiple isolated instances. If state needs to be shared, it must live in Context. Every consumer reads from Context — never calls the hook directly.
+
+**createDay should only create a day document.
+Streak logic should be in a separate route: POST /api/dashboard/streak
+Called separately on login after createDay completes.**

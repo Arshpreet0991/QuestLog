@@ -11,19 +11,34 @@ export function useDayHook() {
   const [currentDate, setCurrentDate] = useState(today);
   const [dayId, setDayId] = useState("");
 
+  //let dayId = "";
+
   // create a day document
+
   const createDay = async () => {
+    // streak logic
+
+    //get previous day
+    const yesterday = new Date(currentDate);
+    yesterday.setDate(currentDate.getDate() - 1);
+
+    // create new day
     try {
-      const response = await axios.post("/api/dashboard/day", { currentDate });
+      const response = await axios.post("/api/dashboard/day", {
+        currentDate,
+        yesterday,
+      });
 
       if (!response.data.success) {
         return console.error(response.data.error);
       }
-
+      //dayId = response.data.data._id;
       setDayId(response.data.data._id);
     } catch (error) {
       return console.error(" day creation failed: ", error);
     }
+
+    // streak logic
   };
 
   // this will run automatically when the dashboard loads
@@ -89,8 +104,11 @@ export function useDayHook() {
       }
 
       const day = response.data.data;
+
       setDayId(day._id);
+      //dayId = response.data.data._id;
       setCurrentDate(nextDate);
+      console.log("Next Day: ", dayId);
     } catch (error) {
       return console.error("next day failed: ", error);
     }

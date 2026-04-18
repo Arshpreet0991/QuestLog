@@ -43,4 +43,5 @@ export interface IUser extends mongoose.Document {
   verifyCode: number;
   verifyCodeExpiry: Date;
   isVerified: boolean;
+  streak: number;
 }

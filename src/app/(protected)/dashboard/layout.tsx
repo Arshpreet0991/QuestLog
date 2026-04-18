@@ -14,35 +14,15 @@ export default function DashboardLayout({
     <DayProvider>
       <TaskProvider>
         <div className="flex flex-col">
-          <nav className="bg-white text-2xl flex text-black p-1 w-full justify-between">
-            <Link
-              className="bg-orange-600 text-2xl text-white p-2 w-3xs rounded-sm text-center font-bold"
-              href="/dashboard"
-            >
-              Home
-            </Link>
-            <Link
-              className="bg-orange-600 text-2xl text-white p-2 w-3xs rounded-sm text-center font-bold"
-              href="/dashboard/body"
-            >
-              Body
-            </Link>
-            <Link
-              className="bg-orange-600 text-2xl text-white p-2 w-3xs rounded-sm text-center font-bold"
-              href="/dashboard/mind"
-            >
-              Mind
-            </Link>
+          <nav className="bg-white text-2xl flex text-black p-1 w-full justify-end">
             <Link
               className="bg-orange-600 text-2xl text-white p-2 w-3xs rounded-sm text-center font-bold"
               href="/dashboard/wealth"
             >
-              Wealth
+              Logout
             </Link>
           </nav>
-          <div className="">
-            <DateNav />
-          </div>
+
           {children}
         </div>
       </TaskProvider>

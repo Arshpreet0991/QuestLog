@@ -32,6 +32,10 @@ const UserSchema = new mongoose.Schema<IUser>(
       type: Boolean,
       default: false,
     },
+    streak: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true },
 );

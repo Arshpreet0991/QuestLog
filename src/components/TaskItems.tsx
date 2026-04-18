@@ -3,22 +3,40 @@ import { useState } from "react";
 import { Category, ITask } from "@/types/Models.Types";
 import useTask from "@/hooks/useTask";
 import ToggleComponent from "./ToggleComponent";
+import { useDayHook } from "@/hooks/useDayHook";
+import toast from "react-hot-toast";
 
 function TaskItems({ todo }: { todo: ITask }) {
   // get task crud from useTask
   const { deleteTask, taskComplete, updateTask } = useTask({ task: todo });
-
   const [taskTitle, setTaskTitle] = useState(todo.title);
   const [isTaskEditable, setIsTaskEditable] = useState(true);
 
+  const { currentDate } = useDayHook();
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
   // edit task
   const editTask = () => {
+    if (currentDate.getTime() === today.getTime())
+      return toast.error("Day already started, cannot edit task");
+
+    if (currentDate.getTime() < today.getTime())
+      return toast.error("Day already passed, cannot edit task");
     setIsTaskEditable(false); // just enable editing, don't save yet
   };
 
   const saveTask = () => {
     setIsTaskEditable(true); // disable editing
     updateTask(todo._id!, taskTitle); // now save
+  };
+
+  const deleteTaskItem = () => {
+    if (currentDate.getTime() < today.getTime()) {
+      toast.error("Day already passed, cannot delete task");
+      return;
+    }
+    deleteTask(todo._id!);
   };
 
   return (
@@ -51,7 +69,7 @@ function TaskItems({ todo }: { todo: ITask }) {
         </button>
         <button
           className="bg-amber-800 text-white p-2 rounded-sm"
-          onClick={() => deleteTask(todo._id!)}
+          onClick={deleteTaskItem}
         >
           Delete
         </button>
