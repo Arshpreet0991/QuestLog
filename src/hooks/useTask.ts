@@ -17,11 +17,6 @@ function useTask({ task }: { task: ITask }) {
 
   // add tasks
   const addTask = async () => {
-    if (currentDate.getTime() < today.getTime()) {
-      toast.error("Day already passed, cannot add task");
-      return;
-    }
-
     const categoryTask = task.category;
 
     const taskListByCategory = taskList.filter(
