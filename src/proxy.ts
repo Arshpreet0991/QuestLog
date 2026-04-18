@@ -9,6 +9,13 @@ export async function proxy(request: NextRequest) {
 
   const path = request.nextUrl.pathname;
 
+  if (path === "/" && token) {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
+  }
+  if (path === "/" && !token) {
+    return NextResponse.redirect(new URL("/sign-in", request.url));
+  }
+
   const isPublicPath =
     path === "/sign-in" || path === "/sign-up" || path === "/verify";
 
