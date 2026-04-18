@@ -1,7 +1,7 @@
 import dbConnect from "@/lib/dbConnection";
 import { errorResponse, successResponse } from "@/lib/response";
 import sessionAuthJs from "@/lib/sessionAuthJs";
-import Day from "@/models/Day.model";
+import Day from "@/models/Day.Model";
 import { ITask } from "@/types/Models.Types";
 import { NextRequest } from "next/server";
 

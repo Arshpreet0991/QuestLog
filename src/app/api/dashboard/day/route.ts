@@ -1,4 +1,4 @@
-import Day from "@/models/Day.model";
+import Day from "@/models/Day.Model";
 import { NextRequest } from "next/server";
 import sessionAuthJs from "@/lib/sessionAuthJs";
 import { errorResponse, successResponse } from "@/lib/response";
