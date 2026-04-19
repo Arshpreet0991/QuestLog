@@ -16,17 +16,10 @@ export function useDayHook() {
   // create a day document
 
   const createDay = async () => {
-    // streak logic
-
-    //get previous day
-    const yesterday = new Date(currentDate);
-    yesterday.setDate(currentDate.getDate() - 1);
-
     // create new day
     try {
       const response = await axios.post("/api/dashboard/day", {
         currentDate,
-        yesterday,
       });
 
       if (!response.data.success) {
@@ -37,8 +30,6 @@ export function useDayHook() {
     } catch (error) {
       return console.error(" day creation failed: ", error);
     }
-
-    // streak logic
   };
 
   // this will run automatically when the dashboard loads
@@ -87,6 +78,7 @@ export function useDayHook() {
   const nextDay = async () => {
     const dayLimit = new Date(today);
     dayLimit.setDate(dayLimit.getDate() + 6);
+
     try {
       const nextDate = new Date(currentDate);
       nextDate.setDate(currentDate.getDate() + 1);
@@ -99,6 +91,7 @@ export function useDayHook() {
       const response = await axios.post("/api/dashboard/day", {
         currentDate: nextDate,
       });
+
       if (!response.data.success) {
         return console.error("cannot fetch next day, ", response.data.error);
       }

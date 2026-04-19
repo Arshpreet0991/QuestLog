@@ -13,9 +13,8 @@ export async function POST(request: NextRequest) {
       return errorResponse(500, "cannot get the user from session");
     }
 
-    const { currentDate, yesterday } = await request.json();
+    const { currentDate } = await request.json();
     if (!currentDate) return errorResponse(500, "cant fetch current date");
-    if (!yesterday) return errorResponse(500, "cant fetch yesterday");
 
     // create day logic
     const day = await Day.findOneAndUpdate(

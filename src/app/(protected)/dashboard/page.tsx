@@ -7,23 +7,13 @@ import Rank from "@/components/Rank";
 import DateNav from "@/components/DateNav";
 import CategoryDisplay from "@/components/CategoryDisplay";
 
-import {
-  GiSwordWound,
-  GiBrain,
-  GiTwoCoins,
-  GiWeightLiftingUp,
-} from "react-icons/gi";
-
 function DashboardPage() {
   const { bodyTaskStats, mindTaskStats, wealthTaskStats, overallStats } =
     useCalculateStats();
 
-  /*
-
-*/
   const rank = useRank();
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen ">
+    <div className="flex flex-col justify-center items-center min-h-screen  ">
       <div>
         <DateNav />
       </div>
@@ -35,15 +25,15 @@ function DashboardPage() {
         <Rank rank={rank} />
       </div>
       <div
-        className=" flex flex-col items-center justify-center  p-15"
+        className=" flex flex-col items-center justify-center border-2 border-white min-w-3/12 py-20 px-15"
         style={{
-          backgroundImage: "url('/parchment2.png')",
+          backgroundImage: "url('/bg-parchment-hd.png')",
           backgroundSize: "100% 100%",
         }}
       >
-        <div className="flex flex-col gap-5 items-center justify-center mt-10">
+        <div className="flex flex-col gap-5 items-center justify-center mt-10 border-2 border-red-600 w-full">
           <Link
-            className=" text-4xl text-white p-2 w-3xs rounded-sm text-center flex justify-between items-center flex-wrap "
+            className=" text-4xl text-white p-2 w-full rounded-sm text-center flex justify-between items-center flex-wrap "
             href="/dashboard/body"
           >
             <CategoryDisplay
@@ -54,7 +44,7 @@ function DashboardPage() {
             />
           </Link>
           <Link
-            className="text-4xl text-white p-2 w-3xs rounded-sm text-center flex justify-between items-center flex-wrap  "
+            className="text-4xl text-white p-2 w-full rounded-sm text-center flex justify-between items-center flex-wrap  "
             href="/dashboard/mind"
           >
             <CategoryDisplay
@@ -65,7 +55,7 @@ function DashboardPage() {
             />
           </Link>
           <Link
-            className=" text-4xl text-white p-2 w-3xs rounded-sm text-center flex justify-between items-center flex-wrap "
+            className="text-4xl text-white p-2 w-full rounded-sm text-center flex justify-between items-center flex-wrap  "
             href="/dashboard/wealth"
           >
             <CategoryDisplay
