@@ -14,18 +14,7 @@ export default function DashboardLayout({
   return (
     <DayProvider>
       <TaskProvider>
-        <div className="flex flex-col">
-          <nav className="bg-white text-2xl flex text-black p-1 w-full justify-end">
-            <button
-              className="bg-orange-600 text-2xl text-white p-2 w-3xs rounded-sm text-center font-bold"
-              onClick={() => signOut({ callbackUrl: "/sign-in" })}
-            >
-              Logout
-            </button>
-          </nav>
-
-          {children}
-        </div>
+        <div className="flex flex-col">{children}</div>
       </TaskProvider>
     </DayProvider>
   );
