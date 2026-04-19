@@ -1,11 +1,8 @@
 import { ITask } from "@/types/Models.Types";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { useDayHook } from "./useDayHook";
-import { useTaskList } from "./useTaskList";
 import { useTaskContext } from "@/context/TaskContext";
 import { useDayContext } from "@/context/DayContext";
-import useCalculateStats from "./useCalulateStats";
 
 function useTask({ task }: { task: ITask }) {
   const { dayId, currentDate } = useDayContext();

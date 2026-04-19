@@ -1,9 +1,8 @@
-import { Category, ITask } from "@/types/Models.Types";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { useDayHook } from "./useDayHook";
 import { useDayContext } from "@/context/DayContext";
-import { da } from "zod/locales";
+import { ITask } from "@/types/Models.Types";
+
 export function useTaskList() {
   const { dayId } = useDayContext();
   const [taskList, setTaskList] = useState<ITask[]>([]);

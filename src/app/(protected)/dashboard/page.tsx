@@ -25,7 +25,7 @@ function DashboardPage() {
         <Rank rank={rank} />
       </div>
       <div
-        className=" flex flex-col items-center justify-center border-2 border-white min-w-3/12 py-20 px-15"
+        className=" flex flex-col items-center justify-center border-2 border-white"
         style={{
           backgroundImage: "url('/bg-parchment-hd.png')",
           backgroundSize: "100% 100%",

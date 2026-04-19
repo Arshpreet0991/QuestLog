@@ -15,6 +15,7 @@ const dayContext = createContext<DayContextType | null>(null);
 // wrapper to provide values to Provider
 export function DayProvider({ children }: { children: React.ReactNode }) {
   const { currentDate, dayId, prevDay, nextDay } = useDayHook();
+
   return (
     <dayContext.Provider value={{ currentDate, dayId, prevDay, nextDay }}>
       {children}

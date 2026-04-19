@@ -13,6 +13,8 @@ export async function POST(request: NextRequest) {
 
     const { task, dayId } = await request.json();
 
+    console.log("Adding task with:", { dayId, userId });
+
     const day = await Day.findOneAndUpdate(
       {
         _id: dayId,

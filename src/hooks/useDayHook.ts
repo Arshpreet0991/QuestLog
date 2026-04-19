@@ -11,8 +11,6 @@ export function useDayHook() {
   const [currentDate, setCurrentDate] = useState(today);
   const [dayId, setDayId] = useState("");
 
-  //let dayId = "";
-
   // create a day document
 
   const createDay = async () => {
@@ -25,8 +23,8 @@ export function useDayHook() {
       if (!response.data.success) {
         return console.error(response.data.error);
       }
-      //dayId = response.data.data._id;
-      setDayId(response.data.data._id);
+
+      setDayId(response.data.data.day._id);
     } catch (error) {
       return console.error(" day creation failed: ", error);
     }
@@ -96,12 +94,8 @@ export function useDayHook() {
         return console.error("cannot fetch next day, ", response.data.error);
       }
 
-      const day = response.data.data;
-
-      setDayId(day._id);
-      //dayId = response.data.data._id;
+      setDayId(response.data.data.day._id);
       setCurrentDate(nextDate);
-      console.log("Next Day: ", dayId);
     } catch (error) {
       return console.error("next day failed: ", error);
     }
