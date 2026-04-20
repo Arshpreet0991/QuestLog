@@ -61,8 +61,6 @@ function useTask({ task }: { task: ITask }) {
   // edit task
   const updateTask = async (taskId: string, updatedTitle: string) => {
     try {
-      if (currentDate.getTime() === today.getTime()) return;
-
       const response = await axios.patch("/api/dashboard/tasks", {
         taskId,
         dayId,
