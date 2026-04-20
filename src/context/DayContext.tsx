@@ -5,6 +5,7 @@ import { useDayHook } from "@/hooks/useDayHook";
 type DayContextType = {
   currentDate: Date;
   dayId: string;
+  username: string;
   nextDay: () => void;
   prevDay: () => void;
 };
@@ -14,10 +15,12 @@ const dayContext = createContext<DayContextType | null>(null);
 
 // wrapper to provide values to Provider
 export function DayProvider({ children }: { children: React.ReactNode }) {
-  const { currentDate, dayId, prevDay, nextDay } = useDayHook();
+  const { currentDate, dayId, prevDay, nextDay, username } = useDayHook();
 
   return (
-    <dayContext.Provider value={{ currentDate, dayId, prevDay, nextDay }}>
+    <dayContext.Provider
+      value={{ currentDate, dayId, prevDay, nextDay, username }}
+    >
       {children}
     </dayContext.Provider>
   );

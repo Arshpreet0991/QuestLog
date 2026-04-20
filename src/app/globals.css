@@ -20,12 +20,16 @@
 }
 
 body {
-  background: var(--background);
   color: var(--foreground);
-}
-
-body {
+  background-color: #0a0a0a;
   background-image: url("/bg-mobile.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 @media (min-width: 768px) {
@@ -40,10 +44,78 @@ body {
   }
 }
 
-/* body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.3);
-  z-index: -1;
-} */
+body {
+  font-family: var(--font-im-fell);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-cinzel);
+}
+
+/* globals.css */
+html,
+body {
+  height: 100%;
+}
+
+@font-face {
+  font-family: "dmc";
+  src: url("/dmc.otf") format("opentype");
+}
+
+/* rank colors */
+.rank-sss {
+  text-shadow:
+    0 0 10px rgba(255, 215, 0, 0.9),
+    0 0 30px rgba(255, 215, 0, 0.6),
+    0 0 60px rgba(255, 215, 0, 0.4);
+  -webkit-text-stroke: 1px rgba(255, 215, 0, 0.8);
+  color: #ffd700 !important;
+}
+
+.rank-s {
+  text-shadow:
+    0 0 10px rgba(255, 255, 0, 0.9),
+    0 0 30px rgba(255, 255, 0, 0.6),
+    0 0 60px rgba(255, 255, 0, 0.4);
+  -webkit-text-stroke: 1px rgba(255, 255, 0, 0.8);
+  color: #ffff00 !important;
+}
+
+.rank-a {
+  text-shadow:
+    0 0 10px rgba(255, 140, 0, 0.9),
+    0 0 30px rgba(255, 140, 0, 0.6),
+    0 0 60px rgba(255, 140, 0, 0.4);
+  -webkit-text-stroke: 1px rgba(255, 140, 0, 0.8);
+  color: #ff8c00 !important;
+}
+
+.rank-b {
+  text-shadow:
+    0 0 10px rgba(255, 50, 50, 0.9),
+    0 0 30px rgba(255, 50, 50, 0.6),
+    0 0 60px rgba(255, 50, 50, 0.4);
+  -webkit-text-stroke: 1px rgba(255, 50, 50, 0.8);
+  color: #ff3232 !important;
+}
+
+.rank-c {
+  text-shadow:
+    0 0 10px rgba(50, 205, 50, 0.9),
+    0 0 30px rgba(50, 205, 50, 0.6),
+    0 0 60px rgba(50, 205, 50, 0.4);
+  -webkit-text-stroke: 1px rgba(50, 205, 50, 0.8);
+  color: #32cd32 !important;
+}
+
+.rank-d {
+  text-shadow:
+    0 0 10px rgba(50, 150, 255, 0.9),
+    0 0 30px rgba(50, 150, 255, 0.6),
+    0 0 60px rgba(50, 150, 255, 0.4);
+  -webkit-text-stroke: 1px rgba(50, 150, 255, 0.8);
+  color: #3296ff !important;
+}

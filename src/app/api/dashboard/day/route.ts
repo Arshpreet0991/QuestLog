@@ -3,6 +3,7 @@ import { NextRequest } from "next/server";
 import sessionAuthJs from "@/lib/sessionAuthJs";
 import { errorResponse, successResponse } from "@/lib/response";
 import dbConnect from "@/lib/dbConnection";
+import User from "@/models/User.Model";
 
 export async function POST(request: NextRequest) {
   await dbConnect();
@@ -38,8 +39,11 @@ export async function POST(request: NextRequest) {
       },
     );
 
+    const user = await User.findById(userId).select("username");
+
     return successResponse(200, "day created successfully", {
       day,
+      username: user.username,
     });
   } catch (error) {
     console.error("Day creation failed ", error);

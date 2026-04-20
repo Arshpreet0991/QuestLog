@@ -10,6 +10,7 @@ export function useDayHook() {
 
   const [currentDate, setCurrentDate] = useState(today);
   const [dayId, setDayId] = useState("");
+  const [username, setUsername] = useState("");
 
   // create a day document
 
@@ -23,8 +24,10 @@ export function useDayHook() {
       if (!response.data.success) {
         return console.error(response.data.error);
       }
-
+      console.log("username,", response.data.data);
       setDayId(response.data.data.day._id);
+
+      setUsername(response.data.data.username);
     } catch (error) {
       return console.error(" day creation failed: ", error);
     }
@@ -105,5 +108,6 @@ export function useDayHook() {
     dayId,
     prevDay,
     nextDay,
+    username,
   };
 }
