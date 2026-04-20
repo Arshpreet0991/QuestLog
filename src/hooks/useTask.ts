@@ -4,7 +4,7 @@ import axios from "axios";
 import { useTaskContext } from "@/context/TaskContext";
 import { useDayContext } from "@/context/DayContext";
 
-function useTask({ task }: { task: ITask }) {
+function useTask() {
   const { dayId, currentDate } = useDayContext();
 
   const { taskList, fetchTaskList } = useTaskContext();
@@ -13,7 +13,7 @@ function useTask({ task }: { task: ITask }) {
   today.setHours(0, 0, 0, 0);
 
   // add tasks
-  const addTask = async () => {
+  const addTask = async ({ task }: { task: ITask }) => {
     const categoryTask = task.category;
 
     const taskListByCategory = taskList.filter(
@@ -90,7 +90,6 @@ function useTask({ task }: { task: ITask }) {
       const response = await axios.patch("/api/dashboard/tasks/complete", {
         taskId,
         dayId,
-        isCompleted: !task.isCompleted,
       });
 
       if (!response.data.success)

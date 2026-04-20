@@ -14,11 +14,17 @@ export async function PATCH(request: NextRequest) {
     const { taskId, dayId, isCompleted } = await request.json();
     if (!taskId) return errorResponse(404, "Quests not found");
 
-    const day = await Day.findOneAndUpdate(
-      { userId, _id: dayId, "taskList._id": taskId },
-      { $set: { "taskList.$.isCompleted": isCompleted } },
-      { new: true },
-    );
+    const day = await Day.findOne({
+      userId,
+      _id: dayId,
+      "taskList._id": taskId,
+    });
+
+    const task = day.taskList.id(taskId);
+
+    task.isCompleted = !task.isCompleted;
+
+    await day.save();
 
     if (!day) return errorResponse(404, "Day not found");
 

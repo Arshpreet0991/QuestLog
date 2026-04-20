@@ -21,10 +21,12 @@ function TaskForm({ category }: { category: Category }) {
     (t) => t.category === task.category && t.taskType === "mainQuest",
   );
 
-  const { addTask } = useTask({ task });
+  const { addTask } = useTask();
+
   const addTaskToList = (e: React.SubmitEvent) => {
     e.preventDefault();
-    addTask();
+    if (task.title === "") return;
+    addTask({ task });
     setTask({ ...task, title: "" });
   };
 

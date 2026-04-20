@@ -12,7 +12,7 @@ import { FaCrown } from "react-icons/fa6";
 
 function TaskItems({ todo }: { todo: ITask }) {
   // get task crud from useTask
-  const { deleteTask, taskComplete, updateTask } = useTask({ task: todo });
+  const { deleteTask, taskComplete, updateTask } = useTask();
   const [taskTitle, setTaskTitle] = useState(todo.title);
   const [isTaskEditable, setIsTaskEditable] = useState(true);
 
@@ -41,8 +41,6 @@ function TaskItems({ todo }: { todo: ITask }) {
   };
 
   const styleMain = <FaCrown />;
-
-  const styleForMainQuest = "bg-amber-950 text-white";
 
   return (
     <>

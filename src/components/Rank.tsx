@@ -21,7 +21,12 @@ function Rank({ rank }: { rank: string | undefined }) {
   if (rank === "D") rankMessage = "Drifter";
   return (
     <>
-      <div className="flex flex-col items-center justify-center text-center bg-amber-950 p-1 border-2 border-double rounded-lg border-amber-200">
+      <div
+        className="flex flex-col items-center justify-center text-center  p-2 rounded-lg "
+        style={{
+          background: "radial-gradient(circle, #92400e 0%, #1c0a00 100%)",
+        }}
+      >
         <div>
           <h2 className="font-bold">Current Rank</h2>
         </div>
