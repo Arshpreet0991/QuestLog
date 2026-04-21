@@ -1,5 +1,6 @@
 "use client";
 
+import { Span } from "next/dist/trace";
 import { Bebas_Neue } from "next/font/google";
 const bebasNeue = Bebas_Neue({
   subsets: ["latin"],
@@ -10,6 +11,7 @@ const bebasNeue = Bebas_Neue({
 function RankMessage({ rank }: { rank: string | undefined }) {
   let rankMessage = "";
   let fontColor = "";
+  const emptyMessage = "Finish quests to Rank Up";
   if (rank === "SSS") {
     rankMessage = "Supreme System Slayer";
     fontColor = "";
@@ -30,7 +32,7 @@ function RankMessage({ rank }: { rank: string | undefined }) {
           }}
           className={`rank-${rank?.toLowerCase()} text-4xl `}
         >
-          {rankMessage}
+          {rank ? rankMessage : emptyMessage}
         </div>
       </div>
     </>
