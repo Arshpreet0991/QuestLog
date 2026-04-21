@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Category, ITask } from "@/types/Models.Types";
 import useTask from "@/hooks/useTask";
-import ToggleComponent from "./ToggleComponent";
+
 import { useDayHook } from "@/hooks/useDayHook";
 import toast from "react-hot-toast";
 import { FaEdit } from "react-icons/fa";

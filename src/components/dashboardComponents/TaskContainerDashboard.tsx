@@ -7,13 +7,13 @@ function TaskContainerDashboard() {
   const { taskList } = useTaskList();
   return (
     <div
-      className=" flex flex-col items-center justify-center  w-full h-full"
-      style={{
-        backgroundImage: "url('/bg-parchment-hd.png')",
-        backgroundSize: "100% 100%",
-      }}
+      className=" flex flex-col items-center justify-center  w-full"
+      // style={{
+      //   backgroundImage: "url('/bg-parchment-hd.png')",
+      //   backgroundSize: "100% 100%",
+      // }}
     >
-      <div>
+      <div className="w-full">
         {taskList.length === 0 ? (
           <AddTaskDashboard />
         ) : (

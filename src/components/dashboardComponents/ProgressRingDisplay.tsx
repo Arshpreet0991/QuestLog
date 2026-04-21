@@ -21,7 +21,7 @@ function ProgressRingDisplay({
           cy="50"
           r={radius}
           fill="none"
-          stroke="#1c0a00"
+          stroke="#FEF3C7"
           strokeWidth="10"
         />
         {/* progress ring */}
@@ -30,7 +30,7 @@ function ProgressRingDisplay({
           cy="50"
           r={radius}
           fill="none"
-          stroke="#FFD700"
+          stroke="#22C55E"
           strokeWidth="10"
           strokeDasharray={circumference}
           strokeDashoffset={offset}

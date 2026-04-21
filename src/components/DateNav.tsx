@@ -1,25 +1,33 @@
 "use client";
 import { useDayContext } from "@/context/DayContext";
+import { GrCaretNext } from "react-icons/gr";
+import { GrCaretPrevious } from "react-icons/gr";
 
 function DateNav() {
   const { prevDay, nextDay, currentDate } = useDayContext();
   return (
     <>
-      <div className="flex items-center justify-between p-1 bg-amber-950 rounded-sm ... transition-all duration-300 shadow-[0_0_15px_5px_rgba(255,215,0,0.3)] cursor-pointer">
+      <div className="flex items-center justify-center p-1 bg-transparent cursor-pointer ">
         <button
-          className="border-2 border-double border-black rounded-sm bg-amber-950"
+          className=" text-amber-100 text-5xl rounded-sm font-bold"
           onClick={prevDay}
         >
-          <img src="/icon-prev.webp" className="h-15 w-15" />
+          <GrCaretPrevious />
         </button>
-        <div className="text-2xl text-amber-100 p-1 font-bold">
+        <div
+          className="border border-amber-100 rounded-full text-2xl px-4 py-3 bg-amber-950"
+          style={{
+            boxShadow:
+              "0 0 10px rgba(255,236,153,0.6), 0 0 20px rgba(255,236,153,0.3)",
+          }}
+        >
           <h1>{currentDate.toDateString()}</h1>
         </div>
         <button
-          className=" text-black rounded-sm border-2 border-double border-black"
+          className=" text-amber-100 text-5xl rounded-sm font-bold"
           onClick={nextDay}
         >
-          <img src="/icon-next.webp" className="h-15 w-15" />
+          <GrCaretNext />
         </button>
       </div>
     </>

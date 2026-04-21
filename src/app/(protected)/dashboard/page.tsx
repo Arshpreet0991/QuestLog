@@ -13,12 +13,12 @@ function DashboardPage() {
 
   const rank = useRank();
   return (
-    <div className="flex flex-col justify-center items-center h-full bg-amber-100/30  ">
+    <div className="flex flex-col  items-center h-full bg-linear-to-b from-amber-950 to-amber-100/50">
       {/* -----------------------------top half-------------------------- */}
       <DashboardContainerTop />
 
       {/* ----------------bottom half --------------- */}
-      <div className="mt-auto w-full flex flex-col items-center h-3/4  p-1 justify-center">
+      <div className="w-full flex flex-col p-1 mt-4 h-full">
         <TaskContainerDashboard />
       </div>
     </div>

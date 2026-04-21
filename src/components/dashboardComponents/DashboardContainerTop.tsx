@@ -14,10 +14,9 @@ function DashboardContainerTop() {
 
   const rank = useRank();
   return (
-    <div className="flex flex-col  w-full   text-center bg-amber-950/70 gap-1">
-      <DateNav />
-      <div className="flex text-lg gap-1 ">
-        <div className="flex-1 border-2 border-amber-100 rounded-md">
+    <div className="flex flex-col  w-full  text-center  gap-1 p-1 ">
+      <div className="flex text-lg gap-1  font-bold">
+        <div className="flex-1 border-2 border-amber-100 rounded-md ">
           <h1 className="">Streak</h1>
         </div>
         <div className="flex-1 border-2 border-amber-100 rounded-md">
@@ -47,10 +46,11 @@ function DashboardContainerTop() {
         </div>
       </div>
       <div className="flex flex-1">
-        <div className="flex-1 border-2 border-amber-100 rounded-md ">
+        <div className="flex-1 border-2 border-amber-100 rounded-md min-h-12 ">
           <Rank rank={rank} />
         </div>
       </div>
+      <DateNav />
     </div>
   );
 }

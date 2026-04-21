@@ -5,7 +5,7 @@ function CategoryIconDisplay({ category }: { category: string }) {
     <div>
       <div className="flex flex-col items-center justify-center rounded-sm">
         <img
-          className="h-30 w-30 object-contain"
+          className="h-20 w-20 object-contain"
           src={`/icon-${category}.png`}
         />
       </div>
