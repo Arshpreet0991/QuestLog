@@ -27,7 +27,7 @@ function DashboardContainerTop() {
         </div>
       </div>
       <div className="flex gap-1">
-        <div className="flex-1 border-2 border-amber-100 rounded-md">
+        <div className="flex-1 border-2 border-amber-100 rounded-md text-amber-100">
           <StreakDisplay />
         </div>
         <div className="flex-1 border-2 border-amber-100 rounded-md">
