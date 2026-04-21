@@ -45,7 +45,7 @@ function TaskItems({ todo }: { todo: ITask }) {
   return (
     <>
       <div
-        className={`text-white bg-amber-100 py-1 rounded-lg  text-2xl flex  justify-between w-full items-center mt-3`}
+        className={`text-white bg-amber-100 rounded-lg flex  justify-between w-full items-center mb-1 mt-1`}
         style={{
           background:
             todo.taskType === "mainQuest"
@@ -54,7 +54,7 @@ function TaskItems({ todo }: { todo: ITask }) {
         }}
       >
         <div className="flex items-center w-full flex-col ">
-          <div className="w-11/12 ">
+          <div className="w-full px-1 ">
             <input
               type="text"
               value={taskTitle}
@@ -63,7 +63,7 @@ function TaskItems({ todo }: { todo: ITask }) {
               className={`w-full p-1 ${isTaskEditable ? "" : "bg-green-200 border-2 border-black rounded-sm"}`}
             />
           </div>
-          <div className="flex items-center w-11/12 justify-between p-1">
+          <div className="flex items-center w-11/12 justify-between ">
             <div className="flex items-center gap-2">
               <button
                 onClick={() => taskComplete(todo._id!)}
@@ -75,7 +75,7 @@ function TaskItems({ todo }: { todo: ITask }) {
                   ${todo.isCompleted ? "translate-x-6" : "translate-x-1"}`}
                 />
               </button>
-              <span className={`text-yellow-500 rounded-sm text-3xl`}>
+              <span className={`text-yellow-500 rounded-sm text-2xl`}>
                 {todo.taskType === "mainQuest" && styleMain}
               </span>
             </div>

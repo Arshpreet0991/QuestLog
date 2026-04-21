@@ -26,7 +26,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${cinzel.variable} ${imFell.variable} w-full min-h-screen`}
     >
-      <body className="min-h-screen flex flex-col ">
+      <body className="min-h-screen flex flex-col  ">
         {children}
         <Toaster />
       </body>

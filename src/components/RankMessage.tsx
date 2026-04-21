@@ -7,7 +7,7 @@ const bebasNeue = Bebas_Neue({
   variable: "--font-bebas",
 });
 
-function Rank({ rank }: { rank: string | undefined }) {
+function RankMessage({ rank }: { rank: string | undefined }) {
   let rankMessage = "";
   let fontColor = "";
   if (rank === "SSS") {
@@ -21,35 +21,20 @@ function Rank({ rank }: { rank: string | undefined }) {
   if (rank === "D") rankMessage = "Drifter";
   return (
     <>
-      <div
-        className="flex flex-col items-center justify-center text-center  p-2 rounded-lg "
-        style={{
-          background: "radial-gradient(circle, #92400e 0%, #1c0a00 100%)",
-        }}
-      >
-        <div>
-          <h2 className="font-bold">Current Rank</h2>
-        </div>
-        <div
-          style={{ fontFamily: "dmc" }}
-          className={`rank-${rank?.toLowerCase()} text-8xl`}
-        >
-          {rank}
-        </div>
+      <div className="flex flex-col items-center justify-center text-center rounded-lg p-1">
         <div
           style={{
             fontFamily: "dmc",
-            WebkitTextStroke: "1px black",
+            WebkitTextStroke: "",
             textShadow: "none",
           }}
-          className={`rank-${rank?.toLowerCase()} text-4xl`}
+          className={`rank-${rank?.toLowerCase()} text-4xl `}
         >
-          {" "}
-          {rankMessage}{" "}
+          {rankMessage}
         </div>
       </div>
     </>
   );
 }
 
-export default Rank;
+export default RankMessage;
