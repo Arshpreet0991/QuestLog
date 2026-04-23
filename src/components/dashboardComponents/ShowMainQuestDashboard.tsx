@@ -30,9 +30,12 @@ function ShowMainQuestDashboard() {
             Add
           </Link>
 
-          <button className="bg-amber-950 px-2 py-1 rounded-md flex-1 border-amber-100 border-2 text-amber-100">
+          <Link
+            href={"/dashboard/stats"}
+            className="bg-amber-950 px-2 py-1 rounded-md flex-1 border-amber-100 border-2 text-amber-100"
+          >
             Stats
-          </button>
+          </Link>
           <Link
             href={"/dashboard/reflect"}
             className="bg-amber-950 px-2 py-1 rounded-md flex-1 border-amber-100 border-2 text-amber-100"
