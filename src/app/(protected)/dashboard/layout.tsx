@@ -15,7 +15,7 @@ export default function DashboardLayout({
   return (
     <DayProvider>
       <TaskProvider>
-        <div className="w-full min-h-screen flex flex-col max-w-xl mx-auto">
+        <div className="w-full min-h-screen flex flex-col max-w-xl mx-auto bg-linear-to-b from-amber-950 to-amber-100/50">
           <NavBarComponent />
           <div className="flex-1 flex flex-col">{children}</div>
         </div>

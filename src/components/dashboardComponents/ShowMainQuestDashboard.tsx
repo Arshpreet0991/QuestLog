@@ -2,14 +2,12 @@
 import { useTaskContext } from "@/context/TaskContext";
 import TaskItems from "../TaskItems";
 import CategoryIconDisplay from "../taskComponents/CategoryIconDisplay";
-import DateNav from "../DateNav";
+import Link from "next/link";
+import ViewAllTaskDisplay from "../taskComponents/ViewAllTaskDisplay";
 
 function ShowMainQuestDashboard() {
-  // const [mainQuestList, setmainQuestList] = useState<ITask[]>([]);
-
   const { taskList } = useTaskContext();
 
-  //setmainQuestList(taskList.filter((task) => task.taskType === "mainQuest"));
   const mainQuestList = taskList.filter(
     (task) => task.taskType === "mainQuest",
   );
@@ -18,18 +16,29 @@ function ShowMainQuestDashboard() {
     <>
       <div className="flex flex-col min-h-72 ">
         <div className="flex items-center justify-between gap-2 p-1">
-          <button className="bg-amber-950 px-2 py-1 rounded-md flex-1 border-amber-100 border-2 text-amber-100">
+          <Link
+            href={"/dashboard/all-quests"}
+            className="bg-amber-950 px-2 py-1 rounded-md flex-1 border-amber-100 border-2 text-amber-100 "
+          >
             View All
-          </button>
-          <button className="bg-amber-950 px-2 py-1 rounded-md flex-1 border-amber-100 border-2 text-amber-100">
+          </Link>
+
+          <Link
+            href={"/dashboard/body"}
+            className="bg-amber-950 px-2 py-1 rounded-md flex-1 border-amber-100 border-2 text-amber-100"
+          >
             Add
-          </button>
+          </Link>
+
           <button className="bg-amber-950 px-2 py-1 rounded-md flex-1 border-amber-100 border-2 text-amber-100">
             Stats
           </button>
-          <button className="bg-amber-950 px-2 py-1 rounded-md flex-1 border-amber-100 border-2 text-amber-100">
+          <Link
+            href={"/dashboard/reflect"}
+            className="bg-amber-950 px-2 py-1 rounded-md flex-1 border-amber-100 border-2 text-amber-100"
+          >
             Reflect
-          </button>
+          </Link>
         </div>
         <div className="text-black  ">
           {mainQuestList.map((task) => (

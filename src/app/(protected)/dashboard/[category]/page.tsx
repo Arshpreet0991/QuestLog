@@ -4,6 +4,7 @@ import { Category } from "@/types/Models.Types";
 import TaskItems from "@/components/TaskItems";
 import { useParams } from "next/navigation";
 import { useTaskContext } from "@/context/TaskContext";
+import CategoryDisplay from "@/components/CategoryDisplay";
 
 export default function CategoryPage() {
   const params = useParams();

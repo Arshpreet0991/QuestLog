@@ -32,7 +32,11 @@ function RankMessage({ rank }: { rank: string | undefined }) {
           }}
           className={`rank-${rank?.toLowerCase()} text-4xl `}
         >
-          {rank ? rankMessage : emptyMessage}
+          {rank ? (
+            rankMessage
+          ) : (
+            <span className="text-amber-100">{emptyMessage}</span>
+          )}
         </div>
       </div>
     </>

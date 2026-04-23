@@ -10,16 +10,15 @@ export interface IDay extends mongoose.Document {
   date: Date;
   userId: mongoose.Types.ObjectId;
   score: number;
-  reflection: IReflection;
+  reflection: string;
   taskList: ITask[];
   dayStatus: "open" | "closed" | "skipped";
 }
 
-export interface IReflection {
-  wentRight: string;
-  wentWrong: string;
-  improve: string;
-}
+// export interface IReflection {
+//   wentRight: string;
+//   improve: string;
+// }
 
 // interface for Task model
 

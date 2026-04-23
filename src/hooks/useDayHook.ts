@@ -24,7 +24,7 @@ export function useDayHook() {
       if (!response.data.success) {
         return console.error(response.data.error);
       }
-      console.log("username,", response.data.data);
+
       setDayId(response.data.data.day._id);
 
       setUsername(response.data.data.username);

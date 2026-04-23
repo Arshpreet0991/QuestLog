@@ -4,6 +4,7 @@ import sessionAuthJs from "@/lib/sessionAuthJs";
 import { errorResponse, successResponse } from "@/lib/response";
 import dbConnect from "@/lib/dbConnection";
 import User from "@/models/User.Model";
+import { ITask } from "@/types/Models.Types";
 
 export async function POST(request: NextRequest) {
   await dbConnect();
@@ -25,11 +26,7 @@ export async function POST(request: NextRequest) {
         $setOnInsert: {
           date: currentDate,
           userId,
-          reflection: {
-            wentRight: "",
-            wentWrong: "",
-            improve: "",
-          },
+          reflection: "",
           taskList: [],
         },
       },

@@ -18,9 +18,8 @@ const DaySchema = new mongoose.Schema<IDay>(
     },
 
     reflection: {
-      wentRight: { type: String },
-      wentWrong: { type: String },
-      improve: { type: String },
+      type: String,
+      default: "",
     },
     taskList: [
       {

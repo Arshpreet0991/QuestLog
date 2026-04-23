@@ -13,7 +13,7 @@ function DashboardPage() {
 
   const rank = useRank();
   return (
-    <div className="flex flex-col  items-center h-full bg-linear-to-b from-amber-950 to-amber-100/50">
+    <div className="flex flex-col  items-center h-full ">
       {/* -----------------------------top half-------------------------- */}
       <DashboardContainerTop />
 

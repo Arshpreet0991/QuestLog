@@ -17,7 +17,7 @@ function NavBarComponent() {
 
   return (
     <nav className="bg-amber-950 text-2xl flex text-amber-50 w-full gap-1 p-2 items-center h-16 min-h-16">
-      <Link className="... p-2" href="/dashboard">
+      <Link className="p-2" href="/dashboard">
         <IoHomeSharp />
       </Link>
 
