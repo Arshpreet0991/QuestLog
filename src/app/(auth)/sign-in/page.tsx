@@ -35,34 +35,44 @@ function SignInPage() {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center min-h-screen">
-        <h1 className="text-3xl m-4">Sign In</h1>
-        <form
-          className="bg-gray-400 flex flex-col gap-2 rounded-sm p-3"
-          onSubmit={handleSubmit}
+      <div className="flex flex-col justify-center items-center min-h-screen text-center">
+        <div
+          className="bg-amber-950 p-2 rounded-md"
+          style={{
+            background: "radial-gradient(circle, #92400e 0%, #1c0a00 100%)",
+          }}
         >
-          <input
-            className="bg-white p-1 text-black rounded-sm"
-            type="email"
-            placeholder="email"
-            value={user.email}
-            onChange={(e) => setUser({ ...user, email: e.target.value })}
-          />
-          <input
-            className="bg-white p-1 text-black rounded-sm"
-            type="password"
-            placeholder="password"
-            value={user.password}
-            onChange={(e) => setUser({ ...user, password: e.target.value })}
-          />
-          <button className="bg-black p-1 rounded-sm">Sign-In</button>
-        </form>
-        <Link className="m-5 " href="/sign-up">
-          New User?{" "}
-          <span className="bg-blue-400 p-2 rounded-sm text-black">
-            Create Account
-          </span>
-        </Link>
+          <h1 className="text-3xl m-4">Sign In</h1>
+          <form
+            className=" flex flex-col gap-2 rounded-sm p-3"
+            onSubmit={handleSubmit}
+          >
+            <input
+              className="bg-white p-1 text-black rounded-sm"
+              type="email"
+              placeholder="email"
+              value={user.email}
+              onChange={(e) => setUser({ ...user, email: e.target.value })}
+            />
+            <input
+              className="bg-white p-1 text-black rounded-sm"
+              type="password"
+              placeholder="password"
+              value={user.password}
+              onChange={(e) => setUser({ ...user, password: e.target.value })}
+            />
+            <button className="bg-amber-100 text-amber-950 font-bold p-2 rounded-sm">
+              Sign-In
+            </button>
+
+            <Link className="m-5 " href="/sign-up">
+              New User?{" "}
+              <span className="bg-green-500 p-2 rounded-sm text-black ml-2">
+                Create Account
+              </span>
+            </Link>
+          </form>
+        </div>
       </div>
     </>
   );
