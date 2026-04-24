@@ -1,6 +1,9 @@
-import React from "react";
+"use client";
+import { useDayContext } from "@/context/DayContext";
 
 function StreakDisplay() {
+  const { streakCount } = useDayContext();
+
   return (
     <div
       style={{
@@ -10,7 +13,7 @@ function StreakDisplay() {
       }}
       className="text-center"
     >
-      <p className="text-8xl">10</p>
+      <p className="text-8xl">{streakCount}</p>
     </div>
   );
 }

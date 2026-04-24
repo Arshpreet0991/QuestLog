@@ -7,6 +7,7 @@ type DayContextType = {
   currentDate: Date;
   dayId: string;
   username: string;
+  streakCount: number;
   nextDay: () => void;
   prevDay: () => void;
 };
@@ -16,11 +17,12 @@ const dayContext = createContext<DayContextType | null>(null);
 
 // wrapper to provide values to Provider
 export function DayProvider({ children }: { children: React.ReactNode }) {
-  const { currentDate, dayId, prevDay, nextDay, username } = useDayHook();
+  const { currentDate, dayId, prevDay, nextDay, username, streakCount } =
+    useDayHook();
 
   return (
     <dayContext.Provider
-      value={{ currentDate, dayId, prevDay, nextDay, username }}
+      value={{ currentDate, dayId, prevDay, nextDay, username, streakCount }}
     >
       {children}
     </dayContext.Provider>

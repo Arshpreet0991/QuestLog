@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
       return errorResponse(500, "cannot get the user from session");
     }
 
-    const { currentDate } = await request.json();
+    const { currentDate, yesterday } = await request.json();
     if (!currentDate) return errorResponse(500, "cant fetch current date");
 
     // create day logic
@@ -36,11 +36,37 @@ export async function POST(request: NextRequest) {
       },
     );
 
-    const user = await User.findById(userId).select("username");
+    // streak logic
+    console.log("userId:", userId);
+    const user = await User.findById(userId);
+    console.log("user found:", user);
+    if (!user) return errorResponse(404, "user not found");
+
+    const prevDay = await Day.findOne({
+      userId,
+      date: yesterday,
+    }).populate("taskList");
+
+    let isYesterdayTaskCompleted = false;
+
+    if (prevDay?.taskList?.length) {
+      isYesterdayTaskCompleted = prevDay.taskList.some(
+        (task: ITask) => task.isCompleted,
+      );
+    }
+
+    if (prevDay && isYesterdayTaskCompleted) {
+      user.streak = user.streak + 1;
+    } else {
+      user.streak = 0;
+    }
+
+    await user.save();
 
     return successResponse(200, "day created successfully", {
       day,
       username: user.username,
+      streak: user.streak,
     });
   } catch (error) {
     console.error("Day creation failed ", error);

@@ -60,7 +60,7 @@ function TaskItems({ todo }: { todo: ITask }) {
               value={taskTitle}
               onChange={(e) => setTaskTitle(e.target.value)}
               disabled={isTaskEditable}
-              className={`w-full p-1 ${isTaskEditable ? "" : "bg-green-200 border-2 border-black rounded-sm"}`}
+              className={`w-full p-1 ${isTaskEditable ? "" : "bg-green-200 border-2 border-black rounded-sm text-black"}`}
             />
           </div>
           <div className="flex items-center w-11/12 justify-between ">

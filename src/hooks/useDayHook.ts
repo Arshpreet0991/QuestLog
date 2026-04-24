@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { ITask } from "@/types/Models.Types";
 
 const today = new Date();
 today.setHours(0, 0, 0, 0); // normalize the date to midnight
@@ -11,14 +12,20 @@ export function useDayHook() {
   const [currentDate, setCurrentDate] = useState(today);
   const [dayId, setDayId] = useState("");
   const [username, setUsername] = useState("");
+  const [streakCount, setStreakCount] = useState(0);
 
   // create a day document
 
   const createDay = async () => {
     // create new day
     try {
+      // previous date for streak logic
+      const yesterday = new Date(currentDate);
+      yesterday.setHours(0, 0, 0, 0);
+
       const response = await axios.post("/api/dashboard/day", {
         currentDate,
+        yesterday, // send yesterday for streak check
       });
 
       if (!response.data.success) {
@@ -26,8 +33,8 @@ export function useDayHook() {
       }
 
       setDayId(response.data.data.day._id);
-
       setUsername(response.data.data.username);
+      setStreakCount(response.data.data.streak);
     } catch (error) {
       return console.error(" day creation failed: ", error);
     }
@@ -109,5 +116,6 @@ export function useDayHook() {
     prevDay,
     nextDay,
     username,
+    streakCount,
   };
 }
