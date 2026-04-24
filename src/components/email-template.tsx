@@ -59,7 +59,7 @@ export function EmailTemplate({ username, otp }: EmailTemplateProps) {
           </div>
           <p style={{ color: "#555", fontSize: "14px" }}>
             This code expires in <strong>1 hour</strong>. If you didn't sign up
-            for Forged, ignore this email.
+            for The Main Quest, ignore this email.
           </p>
         </div>
       </div>
