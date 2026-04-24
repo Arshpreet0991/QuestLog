@@ -3,6 +3,7 @@ import { useTaskContext } from "@/context/TaskContext";
 import TaskItems from "../TaskItems";
 import CategoryIconDisplay from "../taskComponents/CategoryIconDisplay";
 import Link from "next/link";
+import { IoIosHelpCircle } from "react-icons/io";
 
 function ShowMainQuestDashboard() {
   const { taskList } = useTaskContext();
@@ -14,9 +15,10 @@ function ShowMainQuestDashboard() {
   return (
     <>
       <div className="flex flex-col min-h-72 ">
-        <div className="w-full bg-amber-950 p-2 text-2xl text-center text-amber-100 font-bold border-2 border-amber-100 rounded-md mb-2 ">
+        <span className="w-full bg-amber-950  text-xl text-center text-amber-100 font-bold border-2 border-amber-100 rounded-md mb-1 p-1">
           Your Main Quests for Today
-        </div>
+        </span>
+
         <div className="text-black  ">
           {mainQuestList.map((task) => (
             <div key={task._id} className="w-full flex gap-1">

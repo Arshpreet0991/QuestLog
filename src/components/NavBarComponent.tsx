@@ -4,6 +4,8 @@ import { IoHomeSharp } from "react-icons/io5";
 import { signOut } from "next-auth/react";
 import { MdLogout } from "react-icons/md";
 import { usePathname } from "next/navigation";
+import { div } from "framer-motion/client";
+import { IoIosHelpCircle } from "react-icons/io";
 
 function NavBarComponent() {
   const pathname = usePathname();
@@ -17,18 +19,25 @@ function NavBarComponent() {
 
   return (
     <nav className="bg-amber-950 text-2xl flex text-amber-50 w-full gap-1 p-2 items-center h-16 min-h-16">
-      <Link className="p-2" href="/dashboard">
-        <IoHomeSharp />
-      </Link>
-
       {isDashboard ? (
-        <span className="text-white font-bold flex-1 text-center bg-amber-950">
-          <h1 style={{ textShadow: "0 0 10px rgba(255, 215, 0, 1)" }}>
-            The Main Quest
-          </h1>
-        </span>
+        <div className="flex items-center justify-between w-full">
+          <div className="flex flex-col items-center justify-center">
+            <Link href="/dashboard/help">
+              <IoIosHelpCircle />
+            </Link>
+            <span className="text-lg">Help</span>
+          </div>
+          <span className="text-white font-bold flex-1 text-center bg-amber-950">
+            <h1 style={{ textShadow: "0 0 10px rgba(255, 215, 0, 1)" }}>
+              The Main Quest
+            </h1>
+          </span>
+        </div>
       ) : (
         <>
+          <Link className="p-2" href="/dashboard">
+            <IoHomeSharp />
+          </Link>
           <Link
             className={
               pathname === "/dashboard/body" ? activeClass : defaultClass

@@ -14,7 +14,7 @@ function DashboardContainerTop() {
 
   const rank = useRank();
   return (
-    <div className="flex flex-col  w-full  text-center  gap-1 p-1 ">
+    <div className="flex flex-col  w-full  text-center  gap-1">
       <div className="flex text-lg gap-1  font-bold">
         <div className="flex-1 border-2 border-amber-100 rounded-md text-amber-100">
           <h1 className="">Streak</h1>
