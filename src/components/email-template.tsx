@@ -32,7 +32,7 @@ export function EmailTemplate({ username, otp }: EmailTemplateProps) {
               marginBottom: "8px",
             }}
           >
-            Welcome to Forged ⚔️
+            Welcome to The Main Quest ⚔️
           </h1>
           <p style={{ color: "#555", fontSize: "16px" }}>
             Hey {username}, your verification code is:

@@ -19,7 +19,7 @@ function SignInPage() {
       const result = await signIn("credentials", {
         email: user.email,
         password: user.password,
-        redirect: false,
+        redirect: true,
       });
 
       if (result?.error) {
