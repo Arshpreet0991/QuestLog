@@ -15,7 +15,7 @@ function ShowMainQuestDashboard() {
   return (
     <>
       <div className="flex flex-col min-h-72 ">
-        <div className="flex items-center justify-between gap-2 p-1">
+        <div className="flex items-center justify-between gap-2 p-1 text-center">
           <Link
             href={"/dashboard/all-quests"}
             className="bg-amber-950 px-2 py-1 rounded-md flex-1 border-amber-100 border-2 text-amber-100 "

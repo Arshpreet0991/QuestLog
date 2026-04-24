@@ -39,7 +39,7 @@ function SignUpPage() {
           background: "radial-gradient(circle, #92400e 0%, #1c0a00 100%)",
         }}
       >
-        <h1 className="text-3xl m-4">Sign Up</h1>
+        <h1 className="text-3xl m-4 text-amber-100">Sign Up</h1>
         <form
           className=" flex flex-col gap-2 rounded-sm p-3"
           onSubmit={handleSubmit}
@@ -69,7 +69,7 @@ function SignUpPage() {
             Create Account
           </button>
         </form>
-        <Link className="m-5 " href="/sign-in">
+        <Link className="m-5 text-amber-100 " href="/sign-in">
           Already registered?{" "}
           <span className="bg-blue-400 p-2 rounded-sm text-black">Sign-In</span>
         </Link>

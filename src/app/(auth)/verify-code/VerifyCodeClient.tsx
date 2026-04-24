@@ -25,6 +25,7 @@ export default function VerifyCodePage() {
 
       router.push("/dashboard");
     } catch (error) {
+      toast.error("Verification failed");
       console.error("User verification failed: " + error);
       return toast.error("User verification failed");
     }
@@ -32,7 +33,10 @@ export default function VerifyCodePage() {
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen gap-5">
-      <p className="text-2xl p-2 rounded-sm"> {userEmail}</p>
+      <p className="text-2xl p-2 rounded-sm text-black bg- bg-amber-100">
+        {" "}
+        {userEmail}
+      </p>
       <input
         type="number"
         placeholder="Verify Code"

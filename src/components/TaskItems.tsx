@@ -40,6 +40,10 @@ function TaskItems({ todo }: { todo: ITask }) {
     deleteTask(todo._id!);
   };
 
+  const toggleTask = () => {
+    taskComplete(todo._id!);
+  };
+
   const styleMain = <FaCrown />;
 
   return (
@@ -60,13 +64,13 @@ function TaskItems({ todo }: { todo: ITask }) {
               value={taskTitle}
               onChange={(e) => setTaskTitle(e.target.value)}
               disabled={isTaskEditable}
-              className={`w-full p-1 ${isTaskEditable ? "" : "bg-green-200 border-2 border-black rounded-sm text-black"}`}
+              className={`w-full p-1 ${isTaskEditable ? "" : "bg-green-200 border-2 border-black rounded-sm text-black"} ${todo.isCompleted ? "line-through" : ""}`}
             />
           </div>
           <div className="flex items-center w-11/12 justify-between ">
             <div className="flex items-center gap-2">
               <button
-                onClick={() => taskComplete(todo._id!)}
+                onClick={toggleTask}
                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-300 
                 ${todo.isCompleted ? "bg-green-500" : "bg-red-800"}`}
               >
@@ -84,12 +88,14 @@ function TaskItems({ todo }: { todo: ITask }) {
               <button
                 onClick={isTaskEditable ? editTask : saveTask}
                 className="text-2xl text-amber-100 p-1"
+                disabled={todo.isCompleted}
               >
                 {isTaskEditable ? <FaEdit /> : <FaSave />}
               </button>
               <button
                 className="text-2xl text-amber-100 p-1"
                 onClick={deleteTaskItem}
+                disabled={todo.isCompleted}
               >
                 <MdDelete />
               </button>
