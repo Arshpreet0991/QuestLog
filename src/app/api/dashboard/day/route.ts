@@ -37,9 +37,8 @@ export async function POST(request: NextRequest) {
     );
 
     // streak logic
-    console.log("userId:", userId);
     const user = await User.findById(userId);
-    console.log("user found:", user);
+
     if (!user) return errorResponse(404, "user not found");
 
     const prevDay = await Day.findOne({

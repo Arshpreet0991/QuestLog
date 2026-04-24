@@ -3,7 +3,6 @@ import { useTaskContext } from "@/context/TaskContext";
 import TaskItems from "../TaskItems";
 import CategoryIconDisplay from "../taskComponents/CategoryIconDisplay";
 import Link from "next/link";
-import ViewAllTaskDisplay from "../taskComponents/ViewAllTaskDisplay";
 
 function ShowMainQuestDashboard() {
   const { taskList } = useTaskContext();
@@ -15,6 +14,17 @@ function ShowMainQuestDashboard() {
   return (
     <>
       <div className="flex flex-col min-h-72 ">
+        <div className="w-full bg-amber-950 p-2 text-2xl text-center text-amber-100 font-bold border-2 border-amber-100 rounded-md mb-2 ">
+          Your Main Quests for Today
+        </div>
+        <div className="text-black  ">
+          {mainQuestList.map((task) => (
+            <div key={task._id} className="w-full flex gap-1">
+              <CategoryIconDisplay category={task.category} />
+              <TaskItems todo={task} />
+            </div>
+          ))}
+        </div>
         <div className="flex items-center justify-between gap-2 p-1 text-center">
           <Link
             href={"/dashboard/all-quests"}
@@ -42,14 +52,6 @@ function ShowMainQuestDashboard() {
           >
             Reflect
           </Link>
-        </div>
-        <div className="text-black  ">
-          {mainQuestList.map((task) => (
-            <div key={task._id} className="w-full flex gap-1">
-              <CategoryIconDisplay category={task.category} />
-              <TaskItems todo={task} />
-            </div>
-          ))}
         </div>
       </div>
     </>

@@ -43,6 +43,7 @@ function TaskForm({ category }: { category: Category }) {
             <input
               type="text"
               id="addTask"
+              maxLength={25}
               placeholder={`Add ${isMainQuest ? "Main" : "Side"} Task...`}
               value={task.title}
               onChange={(e) => setTask({ ...task, title: e.target.value })}

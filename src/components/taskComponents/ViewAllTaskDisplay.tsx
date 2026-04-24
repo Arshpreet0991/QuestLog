@@ -7,7 +7,13 @@ import DateDisplay from "./DateDisplay";
 function ViewAllTaskDisplay() {
   const { taskList } = useTaskContext();
 
-  const list = taskList.sort((a, b) => a.category.localeCompare(b.category));
+  const list = [...taskList].sort((a, b) => {
+    // first sort by taskType — mainQuest first
+    if (a.taskType === "mainQuest" && b.taskType !== "mainQuest") return -1;
+    if (a.taskType !== "mainQuest" && b.taskType === "mainQuest") return 1;
+    // then sort by category
+    return a.category.localeCompare(b.category);
+  });
 
   return (
     <>

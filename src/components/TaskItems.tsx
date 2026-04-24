@@ -53,8 +53,8 @@ function TaskItems({ todo }: { todo: ITask }) {
         style={{
           background:
             todo.taskType === "mainQuest"
-              ? "radial-gradient(circle, #92400e 0%, #1c0a00 100%)"
-              : "radial-gradient(circle, #57534e 0%, #292524 100%)",
+              ? "radial-gradient(circle, #b45309 0%, #431407 100%)"
+              : "radial-gradient(circle, #4a0a0a 0%, #1a0000 100%)",
         }}
       >
         <div className="flex items-center w-full flex-col ">
@@ -64,7 +64,7 @@ function TaskItems({ todo }: { todo: ITask }) {
               value={taskTitle}
               onChange={(e) => setTaskTitle(e.target.value)}
               disabled={isTaskEditable}
-              className={`w-full p-1 ${isTaskEditable ? "" : "bg-green-200 border-2 border-black rounded-sm text-black"} ${todo.isCompleted ? "line-through" : ""}`}
+              className={`w-full p-1 text-xl ${isTaskEditable ? "" : "bg-green-200 border-2 border-black rounded-sm text-black"} ${todo.isCompleted ? "line-through" : ""}`}
             />
           </div>
           <div className="flex items-center w-11/12 justify-between ">
