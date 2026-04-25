@@ -14,13 +14,14 @@ export function useDayHook() {
   const [username, setUsername] = useState("");
   const [streakCount, setStreakCount] = useState(0);
 
-  // create a day document
+  // create todays day document
 
   const createDay = async () => {
     // create new day
     try {
       // previous date for streak logic
       const yesterday = new Date(currentDate);
+      yesterday.setDate(currentDate.getDate() - 1);
       yesterday.setHours(0, 0, 0, 0);
 
       const response = await axios.post("/api/dashboard/day", {
