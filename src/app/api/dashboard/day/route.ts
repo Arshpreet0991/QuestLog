@@ -36,28 +36,32 @@ export async function POST(request: NextRequest) {
       },
     );
 
-    // streak logic
+    const wasJustCreated = day.createdAt.getTime() === day.updatedAt.getTime();
+
     const user = await User.findById(userId);
+    if (wasJustCreated) {
+      // streak logic
 
-    if (!user) return errorResponse(404, "user not found");
+      if (!user) return errorResponse(404, "user not found");
 
-    const prevDay = await Day.findOne({
-      userId,
-      date: yesterday,
-    }).populate("taskList");
+      const prevDay = await Day.findOne({
+        userId,
+        date: yesterday,
+      }).populate("taskList");
 
-    let isYesterdayTaskCompleted = false;
+      let isYesterdayTaskCompleted = false;
 
-    if (prevDay?.taskList?.length) {
-      isYesterdayTaskCompleted = prevDay.taskList.some(
-        (task: ITask) => task.isCompleted,
-      );
-    }
+      if (prevDay?.taskList?.length) {
+        isYesterdayTaskCompleted = prevDay.taskList.some(
+          (task: ITask) => task.isCompleted,
+        );
+      }
 
-    if (prevDay && isYesterdayTaskCompleted) {
-      user.streak = user.streak + 1;
-    } else {
-      user.streak = 0;
+      if (prevDay && isYesterdayTaskCompleted) {
+        user.streak = user.streak + 1;
+      } else {
+        user.streak = 0;
+      }
     }
 
     await user.save();
