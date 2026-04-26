@@ -39,10 +39,11 @@ export async function POST(request: NextRequest) {
     const wasJustCreated = day.createdAt.getTime() === day.updatedAt.getTime();
 
     const user = await User.findById(userId);
+
+    if (!user) return errorResponse(404, "user not found");
+
     if (wasJustCreated) {
       // streak logic
-
-      if (!user) return errorResponse(404, "user not found");
 
       const prevDay = await Day.findOne({
         userId,
@@ -90,7 +91,6 @@ export async function GET(request: NextRequest) {
     if (!newDate) return errorResponse(400, "Date is required");
 
     const day = await Day.findOne({ userId, date: newDate });
-    //if (!day) return errorResponse(404, "day not found");
 
     if (!day) return successResponse(200, "no day found", null);
 
