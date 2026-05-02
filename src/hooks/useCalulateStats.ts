@@ -61,7 +61,10 @@ export default function useCalculateStats() {
   );
   useEffect(() => {
     if (!dayId || taskList.length === 0) return;
-    const score = (overallStats.completed / overallStats.total) * 100;
+    const score = Number(
+      (overallStats.completed / overallStats.total) * 100,
+    ).toFixed(2);
+
     axios.patch("/api/dashboard/day", { dayId, score });
   }, [taskList]);
 
